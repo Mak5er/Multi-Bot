@@ -1,32 +1,23 @@
 from aiogram import types
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, \
+    InlineKeyboardButton
 
 from main import _
-
-lang_keyboard = InlineKeyboardMarkup()
-lang_keyboard.add(InlineKeyboardButton(text="Українська🇺🇦", callback_data="lang_ukrainian"),
-                  InlineKeyboardButton(text="English🇬🇧", callback_data="lang_english"))
 
 
 def return_qr_type_keyboard():
     qr_type_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
     simple_qr_button = types.KeyboardButton(_("Simple QR code"))
     wifi_qr_button = types.KeyboardButton(_("Wi-Fi QR-code"))
-    menu_button = types.KeyboardButton(_('📂Menu'))
     qr_type_keyboard.row(simple_qr_button, wifi_qr_button)
-    qr_type_keyboard.row(menu_button)
     return qr_type_keyboard
 
 
 def return_select_keyboard():
     select_keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
-    qr_button = KeyboardButton(text=_("QR code"))
-    wt_button = KeyboardButton(text=_("🌦Weather"))
-    nt_button = KeyboardButton(text=_("🎯Tasks"))
-    pass_button = KeyboardButton(text=_("🔐Generate password"))
-    random_num_button = KeyboardButton(text=_("🔢Random number"))
-    select_keyboard.row(qr_button, wt_button, nt_button)
-    select_keyboard.row(pass_button, random_num_button)
+    qr_button = KeyboardButton(_("QR code"))
+    yt_button = KeyboardButton(_("Скачать"))
+    select_keyboard.row(qr_button, yt_button )
     return select_keyboard
 
 
@@ -47,39 +38,28 @@ def return_color_keyboard():
     return color_keyboard
 
 
-def return_location_keyboard():
-    location_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
-    send_location_button = types.KeyboardButton(_('📍Set your location'), request_location=True)
-    location_keyboard.add(send_location_button)
-    return location_keyboard
+def menu():
+    download_button = KeyboardButton('Скачать')
+    menu_kb = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
+    menu_kb.add(download_button)
+    return menu_kb
 
 
-def return_weather_or_forecast_keyboard():
-    weather_or_forecast_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-    get_weather_button = types.KeyboardButton(_('Current weather'))
-    get_forecast_button = types.KeyboardButton(_('Forecast for tomorrow'))
-    menu_button = types.KeyboardButton(_('📂Menu'))
-    weather_or_forecast_keyboard.add(get_weather_button, get_forecast_button)
-    weather_or_forecast_keyboard.add(menu_button)
-    return weather_or_forecast_keyboard
+def back():
+    button_back = KeyboardButton('Отмена')
+    back_kb = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
+    back_kb.add(button_back)
+    return back_kb
 
 
-def return_numbers_keyboard():
-    numbers_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    z_h_button = types.KeyboardButton('0-99')
-    z_t_button = types.KeyboardButton('0-999')
-    z_tt_button = types.KeyboardButton('0-9999')
-    z_ht_button = types.KeyboardButton('0-99999')
-    z_m_button = types.KeyboardButton('0-999999')
-    menu_button = types.KeyboardButton(_('📂Menu'))
-    numbers_keyboard.row(z_h_button, z_t_button, z_tt_button)
-    numbers_keyboard.row(z_ht_button, z_m_button)
-    numbers_keyboard.row(menu_button)
-    return numbers_keyboard
-
-
-def return_menu_keyboard():
-    menu_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    menu_button = types.KeyboardButton(_('📂Menu'))
-    menu_keyboard.add(menu_button)
-    return menu_keyboard
+def make_keyboards(url):
+    inline_kb1 = InlineKeyboardMarkup()
+    button = InlineKeyboardButton('Лучшее качество до 720p(с звуком).', callback_data=f'best_with_audio|{url}')
+    button2 = InlineKeyboardButton('Лучшее качество(без звука).', callback_data=f'best_video|{url}')
+    button3 = InlineKeyboardButton('Звук в лучшем качестве.', callback_data=f'best_audio|{url}')
+    button4 = InlineKeyboardButton('Отмена', callback_data=f'cancel')
+    inline_kb1.add(button)
+    inline_kb1.add(button2)
+    inline_kb1.add(button3)
+    inline_kb1.add(button4)
+    return inline_kb1

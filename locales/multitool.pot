@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-06-29 22:24+0300\n"
+"POT-Creation-Date: 2023-06-27 17:21+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,179 +17,39 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: handlers/qr_code.py:25
-msgid "Choose the type of QR code:"
-msgstr ""
-
-#: handlers/qr_code.py:32 handlers/qr_code.py:48 handlers/qr_code.py:60
-#: handlers/qr_code.py:72 handlers/qr_code.py:84 handlers/random_gen.py:23
-#: handlers/random_gen.py:64 handlers/weather.py:40 keyboards/keyboards.py:15
-#: keyboards/keyboards.py:61 keyboards/keyboards.py:74
-#: keyboards/keyboards.py:83
-msgid "📂Menu"
-msgstr ""
-
-#: handlers/qr_code.py:37 handlers/qr_code.py:115 keyboards/keyboards.py:13
-msgid "Simple QR code"
-msgstr ""
-
-#: handlers/qr_code.py:38
-msgid "Enter URL:"
-msgstr ""
-
-#: handlers/qr_code.py:40 handlers/qr_code.py:122 keyboards/keyboards.py:14
-msgid "Wi-Fi QR-code"
-msgstr ""
-
-#: handlers/qr_code.py:41
-msgid "Enter the Wi-Fi network name:"
-msgstr ""
-
-#: handlers/qr_code.py:53
-msgid "Enter Wi-Fi password:"
-msgstr ""
-
-#: handlers/qr_code.py:65 handlers/qr_code.py:77 handlers/qr_code.py:110
-msgid "Select the color of the QR code."
-msgstr ""
-
-#: handlers/qr_code.py:93
-msgid "Now choose a background color."
-msgstr ""
-
-#: handlers/qr_code.py:109
-msgid "You can't choose the same color twice! Choose the colors again."
-msgstr ""
-
-#: handlers/qr_code.py:134
-msgid "Scan the QR code"
-msgstr ""
-
-#: handlers/random_gen.py:17
-msgid "Please enter password length: "
-msgstr ""
-
-#: handlers/random_gen.py:46
-msgid ""
-"Here are your password:\n"
-"\n"
-" `{password}`"
-msgstr ""
-
-#: handlers/random_gen.py:50
-msgid "Please enter a number: "
-msgstr ""
-
-#: handlers/random_gen.py:57
-msgid "Hi enter range of numbers by -, or select one from examples."
-msgstr ""
-
-#: handlers/random_gen.py:73
-msgid "Your number is `{number}`"
-msgstr ""
-
-#: handlers/random_gen.py:76
-msgid "Please enter correct numbers: "
-msgstr ""
-
-#: handlers/tasks.py:20
-msgid ""
-"*Your tasks:*\n"
-"\n"
-msgstr ""
-
-#: handlers/tasks.py:32 handlers/tasks.py:38
-msgid "➕Add task"
-msgstr ""
-
-#: handlers/tasks.py:41
-msgid "You haven't tasks."
-msgstr ""
-
-#: handlers/tasks.py:60
-msgid "❌Delete"
-msgstr ""
-
-#: handlers/tasks.py:61
-msgid "🔙Back"
-msgstr ""
-
-#: handlers/tasks.py:72
-msgid "Enter your task:"
-msgstr ""
-
-#: handlers/tasks.py:86
-msgid "Task deleted."
-msgstr ""
-
-#: handlers/tasks.py:108
-msgid "Task added."
-msgstr ""
-
-#: handlers/users.py:23
-msgid "Hi! I'm your bot, Multitool."
-msgstr ""
-
-#: handlers/users.py:33
-msgid "Please choose your language!"
-msgstr ""
-
-#: handlers/weather.py:33
-msgid "What do you want to get?"
-msgstr ""
-
-#: handlers/weather.py:49 keyboards/keyboards.py:59
-msgid "Current weather"
-msgstr ""
-
-#: handlers/weather.py:58
-#, python-format
-msgid ""
-"<b>Location: %s</b>\n"
-"Weather: %s\n"
-"Weather description: %s\n"
-"Temperature: %s°C"
-msgstr ""
-
-#: handlers/weather.py:63 handlers/weather.py:87
-msgid "Something went wrong, try again, please"
-msgstr ""
-
-#: handlers/weather.py:66 keyboards/keyboards.py:60
-msgid "Forecast for tomorrow"
-msgstr ""
-
-#: handlers/weather.py:81
-#, python-format
-msgid ""
-"<b>Forecast for %s</b>\n"
-"<i>Location: %s</i>\n"
-"Weather: %s\n"
-"Weather Description: %s\n"
-"Temperature: %s°C"
-msgstr ""
-
-#: keyboards/keyboards.py:23
+#: handlers/qr_code.py:36 handlers/qr_code.py:47
 msgid "QR code"
 msgstr ""
 
-#: keyboards/keyboards.py:24
-msgid "🌦Weather"
+#: handlers/qr_code.py:39 handlers/qr_code.py:54 handlers/qr_code.py:113
+msgid "Simple QR code"
 msgstr ""
 
-#: keyboards/keyboards.py:25
-msgid "🎯Tasks"
+#: handlers/qr_code.py:40 handlers/qr_code.py:57 handlers/qr_code.py:121
+msgid "Wi-Fi QR-code"
 msgstr ""
 
-#: keyboards/keyboards.py:26
-msgid "🔐Generate password"
+#: handlers/qr_code.py:58
+msgid "Enter the Wi-Fi network name:"
 msgstr ""
 
-#: keyboards/keyboards.py:27
-msgid "🔢Random number"
+#: handlers/qr_code.py:66
+msgid "Enter Wi-Fi password:"
 msgstr ""
 
-#: keyboards/keyboards.py:52
-msgid "📍Set your location"
+#: handlers/qr_code.py:74 handlers/qr_code.py:82 handlers/qr_code.py:108
+msgid "Select the color of the QR code."
+msgstr ""
+
+#: handlers/qr_code.py:90
+msgid "Now choose a background color."
+msgstr ""
+
+#: handlers/qr_code.py:107
+msgid "You can't choose the same color twice! Choose the colors again."
+msgstr ""
+
+#: handlers/qr_code.py:136
+msgid "Scan the QR code"
 msgstr ""
 
