@@ -19,6 +19,10 @@ if __name__ == '__main__':
 
     from handlers.qr_code import dp
 
-    from handlers.youtube import dp
+    from handlers.weather import dp
+
+    from handlers.random_gen import dp
+
+    from handlers.tasks import dp
 
     executor.start_polling(dp, skip_updates=True)
