@@ -3,18 +3,13 @@ import os
 import subprocess
 from pathlib import Path
 
-
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import StatesGroup, State
 from vosk import KaldiRecognizer, Model
 
+from keyboards import keyboards as kb
 from main import dp, bot
-
-# Кнопки для вибору мови
-keyboard = types.InlineKeyboardMarkup()
-keyboard.add(types.InlineKeyboardButton(text="English", callback_data="english"))
-keyboard.add(types.InlineKeyboardButton(text="Українська", callback_data="ukrainian"))
 
 
 class VoiceToText(StatesGroup):
@@ -133,28 +128,28 @@ async def voice_message_handler(message: types.Message, state: FSMContext):
         await message.reply("Формат документа не підтримується")
         return
 
-    await message.reply('Вкажіть мову голосового!', reply_markup=keyboard)
+    await message.reply('Вкажіть мову голосового!', reply_markup=kb.lang_keyboard)
 
     await state.update_data(file_id=file_id)
     await VoiceToText.voice_to_text.set()
 
 
-@dp.callback_query_handler(lambda callback_query: callback_query.data in ["english", "ukrainian"],
+@dp.callback_query_handler(lambda callback_query: callback_query.data in ["lang_english", "lang_ukrainian"],
                            state=VoiceToText.voice_to_text)
 async def choose_language(call: types.CallbackQuery, state: FSMContext):
     global stt, current_language
     data = await state.get_data()
 
-    if call.data == "english":
+    if call.data.split("_")[1] == "english":
         current_language = "🇬🇧"
-    elif call.data == "ukrainian":
+    elif call.data.split("_")[1] == "ukrainian":
         current_language = "🇺🇦"
 
     await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                 text=f"Обрана мова: {current_language}")
     await bot.send_chat_action(chat_id=call.message.chat.id, action='typing')
 
-    stt = STT(language=call.data)  # Вибираємо модель для англійської мови
+    stt = STT(language=call.data.split("_")[1])  # Вибираємо модель для англійської мови
 
     file_id = data.get('file_id')
 

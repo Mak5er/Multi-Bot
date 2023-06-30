@@ -4,8 +4,8 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMar
 from main import _
 
 lang_keyboard = InlineKeyboardMarkup()
-lang_keyboard.add(InlineKeyboardButton(text="Українська🇺🇦", callback_data="lang_uk"),
-                  InlineKeyboardButton(text="English🇬🇧", callback_data="lang_en"))
+lang_keyboard.add(InlineKeyboardButton(text="Українська🇺🇦", callback_data="lang_ukrainian"),
+                  InlineKeyboardButton(text="English🇬🇧", callback_data="lang_english"))
 
 
 def return_qr_type_keyboard():
