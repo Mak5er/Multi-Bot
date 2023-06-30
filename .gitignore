@@ -1,6 +1,5 @@
 vosk-model-en
 
 vosk-model-uk
-
-ffmpeg.exe
-/handlers/models/vosk/ffmpeg.exe
+/handlers/models/vosk/vosk-model-en/
+/handlers/models/vosk/vosk-model-uk/

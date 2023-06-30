@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/MultiTool.iml" filepath="$PROJECT_DIR$/.idea/MultiTool.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/Multi Bot.iml" filepath="$PROJECT_DIR$/.idea/Multi Bot.iml" />
+>>>>>>> 15d8466 (ADD main.py)
     </modules>
   </component>
 </project>
