@@ -65,7 +65,7 @@ msgid "Here are your password:\n"
 " `{password}`"
 msgstr "Ось ваш пароль:\n"
 "\n"
-" `{password}`."
+" `{password}`"
 
 #: handlers/random_gen.py:50
 msgid "Please enter a number: "
@@ -77,7 +77,7 @@ msgstr "Привіт, введіть діапазон чисел через - а
 
 #: handlers/random_gen.py:73
 msgid "Your number is `{number}`"
-msgstr "Ваш номер - {number}."
+msgstr "Ваш номер - `{number}`"
 
 #: handlers/random_gen.py:76
 msgid "Please enter correct numbers: "
