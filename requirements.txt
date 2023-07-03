@@ -1,0 +1,4 @@
+aiogram~=2.25.1
+segno~=1.5.2
+requests~=2.31.0
+Flask~=2.3.2
