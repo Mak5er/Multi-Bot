@@ -1,5 +1,4 @@
 from aiogram import types
-import asyncio
 
 from messages import bot_messages as bm
 from keyboards import keyboards as kb
@@ -12,7 +11,7 @@ db = DataBase('services/users.db')
 @dp.message_handler(commands=["start"])
 @dp.message_handler(text=['📂Menu', '📂Меню'])
 async def send_welcome(message: types.Message):
-    await dp.bot.send_chat_action(message.chat.id, "typing")
+    await bot.send_chat_action(message.chat.id, "typing")
 
     user_id = message.from_user.id
     user_name = message.from_user.full_name
@@ -23,12 +22,16 @@ async def send_welcome(message: types.Message):
     await message.reply(_("Hi! I'm your bot, Multitool."), reply_markup=kb.return_select_keyboard())
 
 
+@dp.message_handler(text=["ℹ️INFO", "ℹ️ІНФО"])
+async def info_handler(message: types.Message):
+    await message.answer(bm.send_info())
+
+
 @dp.message_handler(commands=['language'])
 async def change_lang(message: types.Message):
     user_id = message.from_user.id
 
     await bot.send_chat_action(user_id, 'typing')
-    await asyncio.sleep(0.5)
 
     await message.reply(_("Please choose your language!"), reply_markup=kb.lang_keyboard, parse_mode="Markdown")
 
@@ -38,7 +41,6 @@ async def language_callback(call: types.CallbackQuery):
     user_id = call.from_user.id
     language = call.data.split('_')[1]
     await bot.send_chat_action(user_id, 'typing')
-    await asyncio.sleep(0.5)
     await call.message.edit_text(text=bm.choose_lan(language), reply_markup=None)
 
     await db.set_language(user_id, language)

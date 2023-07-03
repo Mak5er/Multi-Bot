@@ -25,8 +25,10 @@ def return_select_keyboard():
     nt_button = KeyboardButton(text=_("🎯Tasks"))
     pass_button = KeyboardButton(text=_("🔐Generate password"))
     random_num_button = KeyboardButton(text=_("🔢Random number"))
+    info_button = KeyboardButton(text=_("ℹ️INFO"))
     select_keyboard.row(qr_button, wt_button, nt_button)
     select_keyboard.row(pass_button, random_num_button)
+    select_keyboard.row(info_button)
     return select_keyboard
 
 

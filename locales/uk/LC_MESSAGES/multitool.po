@@ -1,11 +1,26 @@
+
 msgid ""
 msgstr ""
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: POEditor.com\n"
-"Project-Id-Version: 7шшкк\n"
+"Project-Id-Version:  7шшкк\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2023-07-03 21:36+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: main.py:23
+msgid "I'm stopped!"
+msgstr ""
+
+#: main.py:27
+msgid "I'm launched!"
+msgstr ""
 
 #: handlers/qr_code.py:25
 msgid "Choose the type of QR code:"
@@ -14,8 +29,8 @@ msgstr "Виберіть тип QR-коду:"
 #: handlers/qr_code.py:32 handlers/qr_code.py:48 handlers/qr_code.py:60
 #: handlers/qr_code.py:72 handlers/qr_code.py:84 handlers/random_gen.py:23
 #: handlers/random_gen.py:64 handlers/weather.py:40 keyboards/keyboards.py:15
-#: keyboards/keyboards.py:61 keyboards/keyboards.py:74
-#: keyboards/keyboards.py:83
+#: keyboards/keyboards.py:63 keyboards/keyboards.py:76
+#: keyboards/keyboards.py:85
 msgid "📂Menu"
 msgstr "📂Меню"
 
@@ -60,10 +75,12 @@ msgid "Please enter password length: "
 msgstr "Будь ласка, введіть довжину пароля: "
 
 #: handlers/random_gen.py:46
-msgid "Here are your password:\n"
+msgid ""
+"Here are your password:\n"
 "\n"
 " `{password}`"
-msgstr "Ось ваш пароль:\n"
+msgstr ""
+"Ось ваш пароль:\n"
 "\n"
 " `{password}`"
 
@@ -84,12 +101,12 @@ msgid "Please enter correct numbers: "
 msgstr "Будь ласка, введіть правильні цифри: "
 
 #: handlers/tasks.py:20
-msgid "*Your tasks:*\n"
+msgid ""
+"*Your tasks:*\n"
 "\n"
-""
-msgstr "*Ваші завдання:*\n"
+msgstr ""
+"*Ваші завдання:*\n"
 "\n"
-""
 
 #: handlers/tasks.py:32 handlers/tasks.py:38
 msgid "➕Add task"
@@ -119,11 +136,11 @@ msgstr "Завдання видалено."
 msgid "Task added."
 msgstr "Завдання додано."
 
-#: handlers/users.py:23
+#: handlers/users.py:22
 msgid "Hi! I'm your bot, Multitool."
 msgstr "Привіт! Я твій бот, Мультитул."
 
-#: handlers/users.py:33
+#: handlers/users.py:36
 msgid "Please choose your language!"
 msgstr "Будь ласка, оберіть свою мову!"
 
@@ -131,16 +148,19 @@ msgstr "Будь ласка, оберіть свою мову!"
 msgid "What do you want to get?"
 msgstr "Що ви хочете отримати?"
 
-#: handlers/weather.py:49 keyboards/keyboards.py:59
+#: handlers/weather.py:49 keyboards/keyboards.py:61
 msgid "Current weather"
 msgstr "Поточна погода"
 
 #: handlers/weather.py:58
-msgid "<b>Location: %s</b>\n"
+#, python-format
+msgid ""
+"<b>Location: %s</b>\n"
 "Weather: %s\n"
 "Weather description: %s\n"
 "Temperature: %s°C"
-msgstr "<b>Місцезнаходження: %s</b>\n"
+msgstr ""
+"<b>Місцезнаходження: %s</b>\n"
 "Погода: %s\n"
 "Опис погоди: %s\n"
 "Температура: %s°C"
@@ -149,17 +169,20 @@ msgstr "<b>Місцезнаходження: %s</b>\n"
 msgid "Something went wrong, try again, please"
 msgstr "Щось пішло не так, спробуйте ще раз, будь ласка"
 
-#: handlers/weather.py:66 keyboards/keyboards.py:60
+#: handlers/weather.py:66 keyboards/keyboards.py:62
 msgid "Forecast for tomorrow"
 msgstr "Прогноз на завтра"
 
 #: handlers/weather.py:81
-msgid "<b>Forecast for %s</b>\n"
+#, python-format
+msgid ""
+"<b>Forecast for %s</b>\n"
 "<i>Location: %s</i>\n"
 "Weather: %s\n"
 "Weather Description: %s\n"
 "Temperature: %s°C"
-msgstr "<b>Прогноз для %s</b>\n"
+msgstr ""
+"<b>Прогноз для %s</b>\n"
 "<i>Місцезнаходження: %s</i>\n"
 "Погода: %s\n"
 "Опис погоди: %s\n"
@@ -185,7 +208,292 @@ msgstr "🔐Згенерувати пароль"
 msgid "🔢Random number"
 msgstr "🔢Випадкове число"
 
-#: keyboards/keyboards.py:52
+#: keyboards/keyboards.py:28
+msgid "ℹ️INFO"
+msgstr "ℹ️ІНФО"
+
+#: keyboards/keyboards.py:54
 msgid "📍Set your location"
 msgstr "📍Надайте свою локацію"
+
+#: messages/bot_messages.py:18
+msgid ""
+"🤖 This is a multi-tasking bot that can perform a variety of tasks. Here "
+"is a list of available functions:\n"
+"\n"
+"️/start - start interaction with the bot\n"
+"QR code - generate a QR code\n"
+"🔢Random number - generate a random number\n"
+"🔐Generate password - generate a random password\n"
+"🎯Tasks - create and schedule tasks\n"
+"🌦Weather - view the weather"
+msgstr ""
+"🤖 Це бот-мультитул, який може виконувати різноманітні завдання. Ось список доступних функцій:\n"
+"\n"
+"️/start - початок взаємодії з ботом"
+"QR code - згенерувати QR-код"
+"🔢Random number - згенерувати випадкове число"
+"🔐Generate password - згенерувати пароль"
+"🎯Tasks - створити та планувати завдання"
+"🌦Weather - переглянути погоду"
+
+#: venv/Lib/site-packages/click/_termui_impl.py:496
+msgid "{editor}: Editing failed"
+msgstr ""
+
+#: venv/Lib/site-packages/click/_termui_impl.py:500
+msgid "{editor}: Editing failed: {e}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:1097
+msgid "Aborted!"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:1282
+#: venv/Lib/site-packages/click/decorators.py:495
+msgid "Show this message and exit."
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:1313
+#: venv/Lib/site-packages/click/core.py:1339
+msgid "(Deprecated) {text}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:1357
+msgid "Options"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:1385
+msgid "Got unexpected extra argument ({args})"
+msgid_plural "Got unexpected extra arguments ({args})"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/click/core.py:1398
+msgid "DeprecationWarning: The command {name!r} is deprecated."
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:1605
+msgid "Commands"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:1637
+msgid "Missing command."
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:1715
+msgid "No such command {name!r}."
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:2271
+msgid "Value must be an iterable."
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:2293
+msgid "Takes {nargs} values but 1 was given."
+msgid_plural "Takes {nargs} values but {len} were given."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/click/core.py:2734
+msgid "env var: {var}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:2764
+msgid "(dynamic)"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:2777
+msgid "default: {default}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:2790
+msgid "required"
+msgstr ""
+
+#: venv/Lib/site-packages/click/decorators.py:400
+#, python-format
+msgid "%(prog)s, version %(version)s"
+msgstr ""
+
+#: venv/Lib/site-packages/click/decorators.py:464
+msgid "Show the version and exit."
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:43
+#: venv/Lib/site-packages/click/exceptions.py:79
+msgid "Error: {message}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:71
+msgid "Try '{command} {option}' for help."
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:120
+msgid "Invalid value: {message}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:122
+msgid "Invalid value for {param_hint}: {message}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:178
+msgid "Missing argument"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:180
+msgid "Missing option"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:182
+msgid "Missing parameter"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:184
+msgid "Missing {param_type}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:191
+msgid "Missing parameter: {param_name}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:211
+msgid "No such option: {name}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:225
+msgid "Did you mean {possibility}?"
+msgid_plural "(Possible options: {possibilities})"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/click/exceptions.py:261
+msgid "unknown error"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:268
+msgid "Could not open file {filename!r}: {message}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/parser.py:231
+msgid "Argument {name!r} takes {nargs} values."
+msgstr ""
+
+#: venv/Lib/site-packages/click/parser.py:413
+msgid "Option {name!r} does not take a value."
+msgstr ""
+
+#: venv/Lib/site-packages/click/parser.py:473
+msgid "Option {name!r} requires an argument."
+msgid_plural "Option {name!r} requires {nargs} arguments."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/click/shell_completion.py:315
+msgid "Shell completion is not supported for Bash versions older than 4.4."
+msgstr ""
+
+#: venv/Lib/site-packages/click/shell_completion.py:322
+msgid "Couldn't detect Bash version, shell completion is not supported."
+msgstr ""
+
+#: venv/Lib/site-packages/click/termui.py:160
+msgid "Repeat for confirmation"
+msgstr ""
+
+#: venv/Lib/site-packages/click/termui.py:176
+msgid "Error: The value you entered was invalid."
+msgstr ""
+
+#: venv/Lib/site-packages/click/termui.py:178
+msgid "Error: {e.message}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/termui.py:189
+msgid "Error: The two entered values do not match."
+msgstr ""
+
+#: venv/Lib/site-packages/click/termui.py:245
+msgid "Error: invalid input"
+msgstr ""
+
+#: venv/Lib/site-packages/click/termui.py:776
+msgid "Press any key to continue..."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:265
+msgid ""
+"Choose from:\n"
+"\t{choices}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:299
+msgid "{value!r} is not {choice}."
+msgid_plural "{value!r} is not one of {choices}."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/click/types.py:389
+msgid "{value!r} does not match the format {format}."
+msgid_plural "{value!r} does not match the formats {formats}."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/click/types.py:409
+msgid "{value!r} is not a valid {number_type}."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:465
+msgid "{value} is not in the range {range}."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:606
+msgid "{value!r} is not a valid boolean."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:630
+msgid "{value!r} is not a valid UUID."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:811
+msgid "file"
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:813
+msgid "directory"
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:815
+msgid "path"
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:861
+msgid "{name} {filename!r} does not exist."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:870
+msgid "{name} {filename!r} is a file."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:878
+msgid "{name} '{filename}' is a directory."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:887
+msgid "{name} {filename!r} is not readable."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:896
+msgid "{name} {filename!r} is not writable."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:905
+msgid "{name} {filename!r} is not executable."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:971
+msgid "{len_type} values are required, but {len_value} was given."
+msgid_plural "{len_type} values are required, but {len_value} were given."
+msgstr[0] ""
+msgstr[1] ""
 

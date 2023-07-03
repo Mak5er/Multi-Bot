@@ -18,6 +18,15 @@ i18n = setup_middleware(dp)
 
 _ = i18n.gettext
 
+
+async def on_shutdown(dp):
+    await bot.send_message(config.admin_id, _("I'm stopped!"))
+
+
+async def on_startup(dp):
+    await bot.send_message(config.admin_id, _("I'm launched!"))
+
+
 if __name__ == '__main__':
     from handlers.users import dp
     from handlers.qr_code import dp
@@ -28,4 +37,4 @@ if __name__ == '__main__':
     import keep_alive
 
     keep_alive.keep_alive()
-    executor.start_polling(dp, skip_updates=True)
+    executor.start_polling(dp, skip_updates=True, on_startup=on_startup, on_shutdown=on_shutdown)
