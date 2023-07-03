@@ -1,10 +1,9 @@
+from aiogram import types
 import asyncio
 
-from aiogram import types
-
+from messages import bot_messages as bm
 from keyboards import keyboards as kb
 from main import dp, bot, _
-from messages import bot_messages as bm
 from services import DataBase
 
 db = DataBase('services/users.db')
@@ -37,8 +36,7 @@ async def change_lang(message: types.Message):
 @dp.callback_query_handler(lambda call: call.data.startswith('lang_'))
 async def language_callback(call: types.CallbackQuery):
     user_id = call.from_user.id
-    full_language = call.data.split('_')[1]
-    language = full_language[0:2]
+    language = call.data.split('_')[1]
     await bot.send_chat_action(user_id, 'typing')
     await asyncio.sleep(0.5)
     await call.message.edit_text(text=bm.choose_lan(language), reply_markup=None)

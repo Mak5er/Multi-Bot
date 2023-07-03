@@ -25,6 +25,7 @@ if __name__ == '__main__':
 
     from handlers.tasks import dp
 
-    from handlers.voice import dp
+    import keep_alive
 
+    keep_alive.keep_alive()
     executor.start_polling(dp, skip_updates=True)

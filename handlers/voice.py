@@ -25,7 +25,7 @@ class STT:
 
     default_init = {
         "sample_rate": 16000,
-        "ffmpeg_path": "handlers/models/vosk"  # путь к ffmpeg
+        "ffmpeg_path": "handlers/models/vosk/"  # путь к ffmpeg
     }
 
     def __init__(self,
@@ -73,7 +73,7 @@ class STT:
                 "Ffmpeg: сохраните ffmpeg.exe в папку ffmpeg\n"
                 "Скачайте ffmpeg.exe по ссылке https://ffmpeg.org/download.html"
             )
-        self.ffmpeg_path = self.ffmpeg_path + '/ffmpeg'
+        self.ffmpeg_path = self.ffmpeg_path + 'ffmpeg.exe'
 
     def audio_to_text(self, audio_file_name=None) -> str:
         """
