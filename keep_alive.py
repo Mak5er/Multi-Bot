@@ -12,7 +12,7 @@ def main():
 
 
 def run():
-    app.run(debug=True, port=os.getenv("PORT", default=5000))  # don't touch this
+    app.run(port=os.getenv("PORT", default=5000))  # don't touch this
 
 
 def keep_alive():
