@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from threading import Thread
 
@@ -10,7 +12,7 @@ def main():
 
 
 def run():
-    app.run(host="0.0.0.0", port=$PORT)  # don't touch this
+    app.run(debug=True, port=os.getenv("PORT", default=5000))  # don't touch this
 
 
 def keep_alive():
