@@ -33,6 +33,7 @@ if __name__ == '__main__':
     from handlers.weather import dp
     from handlers.random_gen import dp
     from handlers.tasks import dp
+    from handlers.entertaiment import dp
 
     import keep_alive
 

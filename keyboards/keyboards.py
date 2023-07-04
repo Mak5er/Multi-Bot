@@ -25,9 +25,11 @@ def return_select_keyboard():
     nt_button = KeyboardButton(text=_("🎯Tasks"))
     pass_button = KeyboardButton(text=_("🔐Generate password"))
     random_num_button = KeyboardButton(text=_("🔢Random number"))
+    entertainment_button = KeyboardButton(text=_('Entertainments🎮'))
     info_button = KeyboardButton(text=_("ℹ️INFO"))
     select_keyboard.row(qr_button, wt_button, nt_button)
     select_keyboard.row(pass_button, random_num_button)
+    select_keyboard.row(entertainment_button)
     select_keyboard.row(info_button)
     return select_keyboard
 
@@ -52,7 +54,9 @@ def return_color_keyboard():
 def return_location_keyboard():
     location_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
     send_location_button = types.KeyboardButton(_('📍Set your location'), request_location=True)
+    menu_button = types.KeyboardButton(_('📂Menu'))
     location_keyboard.add(send_location_button)
+    location_keyboard.add(menu_button)
     return location_keyboard
 
 
@@ -85,3 +89,18 @@ def return_menu_keyboard():
     menu_button = types.KeyboardButton(_('📂Menu'))
     menu_keyboard.add(menu_button)
     return menu_keyboard
+
+
+def return_entertainment_keyboard():
+    entertainment_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    bowling_button = types.KeyboardButton(_('Bowling🎳'))
+    dart_button = types.KeyboardButton(_('Darts🎯'))
+    dice_button = types.KeyboardButton(_('Dice🎲'))
+    basket_button = types.KeyboardButton(_('Basketball🏀'))
+    casino_button = types.KeyboardButton(_('Casino🎰'))
+    football_button = types.KeyboardButton(_('Football⚽'))
+    menu_button = types.KeyboardButton(_('📂Menu'))
+    entertainment_keyboard.add(bowling_button, dart_button, dice_button)
+    entertainment_keyboard.add(basket_button, casino_button, football_button)
+    entertainment_keyboard.add(menu_button)
+    return entertainment_keyboard

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-03 21:36+0300\n"
+"POT-Creation-Date: 2023-07-04 14:56+0300\n"
 "PO-Revision-Date: 2023-06-29 22:25+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -26,15 +26,65 @@ msgstr ""
 msgid "I'm launched!"
 msgstr ""
 
+#: handlers/entertaiment.py:8
+msgid "Hi, this is the entertainment section!"
+msgstr ""
+
+#: handlers/entertaiment.py:21 handlers/entertaiment.py:29
+msgid "Yay, I scored!"
+msgstr ""
+
+#: handlers/entertaiment.py:23
+msgid "Uhm..."
+msgstr ""
+
+#: handlers/entertaiment.py:25 handlers/entertaiment.py:31
+#: handlers/entertaiment.py:35 handlers/entertaiment.py:55
+msgid "I missed :("
+msgstr ""
+
+#: handlers/entertaiment.py:37
+msgid "Yay, I scored a strike!"
+msgstr ""
+
+#: handlers/entertaiment.py:40
+msgid "I knocked down a *{dice_result}* bowling pin."
+msgstr ""
+
+#: handlers/entertaiment.py:45
+msgid "Yay, I win!"
+msgstr ""
+
+#: handlers/entertaiment.py:47
+msgid "Almost... :("
+msgstr ""
+
+#: handlers/entertaiment.py:49
+msgid "I lost :("
+msgstr ""
+
+#: handlers/entertaiment.py:53
+msgid "Into the apple!"
+msgstr ""
+
+#: handlers/entertaiment.py:58
+msgid "I'm on the *{line}* line"
+msgstr ""
+
+#: handlers/entertaiment.py:61
+msgid "The dice rolled *{dice_result}*"
+msgstr ""
+
 #: handlers/qr_code.py:25
 msgid "Choose the type of QR code:"
 msgstr ""
 
 #: handlers/qr_code.py:32 handlers/qr_code.py:48 handlers/qr_code.py:60
 #: handlers/qr_code.py:72 handlers/qr_code.py:84 handlers/random_gen.py:23
-#: handlers/random_gen.py:64 handlers/weather.py:40 keyboards/keyboards.py:15
-#: keyboards/keyboards.py:63 keyboards/keyboards.py:76
-#: keyboards/keyboards.py:85
+#: handlers/random_gen.py:64 handlers/weather.py:46 keyboards/keyboards.py:15
+#: keyboards/keyboards.py:57 keyboards/keyboards.py:67
+#: keyboards/keyboards.py:80 keyboards/keyboards.py:89
+#: keyboards/keyboards.py:102
 msgid "📂Menu"
 msgstr ""
 
@@ -143,15 +193,23 @@ msgstr ""
 msgid "Please choose your language!"
 msgstr ""
 
-#: handlers/weather.py:33
+#: handlers/weather.py:25
+msgid "Please share your location"
+msgstr ""
+
+#: handlers/weather.py:35 handlers/weather.py:69 handlers/weather.py:93
+msgid "Something went wrong, try again, please"
+msgstr ""
+
+#: handlers/weather.py:39
 msgid "What do you want to get?"
 msgstr ""
 
-#: handlers/weather.py:49 keyboards/keyboards.py:61
+#: handlers/weather.py:55 keyboards/keyboards.py:65
 msgid "Current weather"
 msgstr ""
 
-#: handlers/weather.py:58
+#: handlers/weather.py:64
 #, python-format
 msgid ""
 "<b>Location: %s</b>\n"
@@ -160,15 +218,11 @@ msgid ""
 "Temperature: %s°C"
 msgstr ""
 
-#: handlers/weather.py:63 handlers/weather.py:87
-msgid "Something went wrong, try again, please"
-msgstr ""
-
-#: handlers/weather.py:66 keyboards/keyboards.py:62
+#: handlers/weather.py:72 keyboards/keyboards.py:66
 msgid "Forecast for tomorrow"
 msgstr ""
 
-#: handlers/weather.py:81
+#: handlers/weather.py:87
 #, python-format
 msgid ""
 "<b>Forecast for %s</b>\n"
@@ -199,11 +253,39 @@ msgid "🔢Random number"
 msgstr ""
 
 #: keyboards/keyboards.py:28
+msgid "Entertainments🎮"
+msgstr ""
+
+#: keyboards/keyboards.py:29
 msgid "ℹ️INFO"
 msgstr ""
 
-#: keyboards/keyboards.py:54
+#: keyboards/keyboards.py:56
 msgid "📍Set your location"
+msgstr ""
+
+#: keyboards/keyboards.py:96
+msgid "Bowling🎳"
+msgstr ""
+
+#: keyboards/keyboards.py:97
+msgid "Darts🎯"
+msgstr ""
+
+#: keyboards/keyboards.py:98
+msgid "Dice🎲"
+msgstr ""
+
+#: keyboards/keyboards.py:99
+msgid "Basketball🏀"
+msgstr ""
+
+#: keyboards/keyboards.py:100
+msgid "Casino🎰"
+msgstr ""
+
+#: keyboards/keyboards.py:101
+msgid "Football⚽"
 msgstr ""
 
 #: messages/bot_messages.py:18

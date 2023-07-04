@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  7шшкк\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-03 21:36+0300\n"
+"POT-Creation-Date: 2023-07-04 14:56+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -22,15 +22,65 @@ msgstr ""
 msgid "I'm launched!"
 msgstr ""
 
+#: handlers/entertaiment.py:8
+msgid "Hi, this is the entertainment section!"
+msgstr "Привіт, це розділ розваг!"
+
+#: handlers/entertaiment.py:21 handlers/entertaiment.py:29
+msgid "Yay, I scored!"
+msgstr "Ура, я забив!"
+
+#: handlers/entertaiment.py:23
+msgid "Uhm..."
+msgstr "Емм..."
+
+#: handlers/entertaiment.py:25 handlers/entertaiment.py:31
+#: handlers/entertaiment.py:35 handlers/entertaiment.py:55
+msgid "I missed :("
+msgstr "Я промазав :("
+
+#: handlers/entertaiment.py:37
+msgid "Yay, I scored a strike!"
+msgstr "Ура, я забив страйк!"
+
+#: handlers/entertaiment.py:40
+msgid "I knocked down a *{dice_result}* bowling pin."
+msgstr "Я збив стільки кегль: *{dice_result}* "
+
+#: handlers/entertaiment.py:45
+msgid "Yay, I win!"
+msgstr "Ура, я виграв!"
+
+#: handlers/entertaiment.py:47
+msgid "Almost... :("
+msgstr "Майже... :("
+
+#: handlers/entertaiment.py:49
+msgid "I lost :("
+msgstr "Я програв :("
+
+#: handlers/entertaiment.py:53
+msgid "Into the apple!"
+msgstr "В яблучко!"
+
+#: handlers/entertaiment.py:58
+msgid "I'm on the *{line}* line"
+msgstr "Я попав на лінію: *{line}*"
+
+#: handlers/entertaiment.py:61
+msgid "The dice rolled *{dice_result}*"
+msgstr "На кубику випало *{dice_result}*"
+
 #: handlers/qr_code.py:25
 msgid "Choose the type of QR code:"
 msgstr "Виберіть тип QR-коду:"
 
 #: handlers/qr_code.py:32 handlers/qr_code.py:48 handlers/qr_code.py:60
 #: handlers/qr_code.py:72 handlers/qr_code.py:84 handlers/random_gen.py:23
-#: handlers/random_gen.py:64 handlers/weather.py:40 keyboards/keyboards.py:15
-#: keyboards/keyboards.py:63 keyboards/keyboards.py:76
-#: keyboards/keyboards.py:85
+#: handlers/random_gen.py:64 handlers/weather.py:46 keyboards/keyboards.py:15
+#: keyboards/keyboards.py:57 keyboards/keyboards.py:67
+#: keyboards/keyboards.py:80 keyboards/keyboards.py:89
+#: keyboards/keyboards.py:102
 msgid "📂Menu"
 msgstr "📂Меню"
 
@@ -144,15 +194,24 @@ msgstr "Привіт! Я твій бот, Мультитул."
 msgid "Please choose your language!"
 msgstr "Будь ласка, оберіть свою мову!"
 
-#: handlers/weather.py:33
+#: handlers/weather.py:25
+#, fuzzy
+msgid "Please share your location"
+msgstr "📍Надайте свою локацію"
+
+#: handlers/weather.py:35 handlers/weather.py:69 handlers/weather.py:93
+msgid "Something went wrong, try again, please"
+msgstr "Щось пішло не так, спробуйте ще раз, будь ласка"
+
+#: handlers/weather.py:39
 msgid "What do you want to get?"
 msgstr "Що ви хочете отримати?"
 
-#: handlers/weather.py:49 keyboards/keyboards.py:61
+#: handlers/weather.py:55 keyboards/keyboards.py:65
 msgid "Current weather"
 msgstr "Поточна погода"
 
-#: handlers/weather.py:58
+#: handlers/weather.py:64
 #, python-format
 msgid ""
 "<b>Location: %s</b>\n"
@@ -165,15 +224,11 @@ msgstr ""
 "Опис погоди: %s\n"
 "Температура: %s°C"
 
-#: handlers/weather.py:63 handlers/weather.py:87
-msgid "Something went wrong, try again, please"
-msgstr "Щось пішло не так, спробуйте ще раз, будь ласка"
-
-#: handlers/weather.py:66 keyboards/keyboards.py:62
+#: handlers/weather.py:72 keyboards/keyboards.py:66
 msgid "Forecast for tomorrow"
 msgstr "Прогноз на завтра"
 
-#: handlers/weather.py:81
+#: handlers/weather.py:87
 #, python-format
 msgid ""
 "<b>Forecast for %s</b>\n"
@@ -209,12 +264,40 @@ msgid "🔢Random number"
 msgstr "🔢Випадкове число"
 
 #: keyboards/keyboards.py:28
+msgid "Entertainments🎮"
+msgstr "Розваги🎮"
+
+#: keyboards/keyboards.py:29
 msgid "ℹ️INFO"
 msgstr "ℹ️ІНФО"
 
-#: keyboards/keyboards.py:54
+#: keyboards/keyboards.py:56
 msgid "📍Set your location"
 msgstr "📍Надайте свою локацію"
+
+#: keyboards/keyboards.py:96
+msgid "Bowling🎳"
+msgstr "Боулінг🎳"
+
+#: keyboards/keyboards.py:97
+msgid "Darts🎯"
+msgstr "Дартс🎯"
+
+#: keyboards/keyboards.py:98
+msgid "Dice🎲"
+msgstr "Кубик🎲"
+
+#: keyboards/keyboards.py:99
+msgid "Basketball🏀"
+msgstr "Баскетбол🏀"
+
+#: keyboards/keyboards.py:100
+msgid "Casino🎰"
+msgstr "Казино🎰"
+
+#: keyboards/keyboards.py:101
+msgid "Football⚽"
+msgstr "Футбол⚽"
 
 #: messages/bot_messages.py:18
 msgid ""
@@ -228,7 +311,8 @@ msgid ""
 "🎯Tasks - create and schedule tasks\n"
 "🌦Weather - view the weather"
 msgstr ""
-"🤖 Це бот-мультитул, який може виконувати різноманітні завдання. Ось список доступних функцій:\n"
+"🤖 Це бот-мультитул, який може виконувати різноманітні завдання. Ось "
+"список доступних функцій:\n"
 "\n"
 "️/start - початок взаємодії з ботом\n"
 "QR code - згенерувати QR-код\n"

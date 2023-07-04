@@ -22,14 +22,20 @@ class Weather(StatesGroup):
 
 @dp.message_handler(text=["🌦Weather", "🌦Погода"])
 async def get_url_type(message: types.Message):
-    await message.answer("Please share your location", reply_markup=kb.return_location_keyboard())
+    await message.answer(_("Please share your location"), reply_markup=kb.return_location_keyboard())
     await Weather.get_location.set()
 
 
-@dp.message_handler(content_types=['location'], state=Weather.get_location)
+@dp.message_handler(state=Weather.get_location)
 async def send_location(message: types.Message, state: FSMContext):
     message_str = message.location
     print(message_str)
+    if not message_str:
+        print("HUi")
+        await bot.send_message(message.chat.id, _('Something went wrong, try again, please'),
+                               reply_markup=kb.return_select_keyboard())
+        return
+
     await message.answer(_("What do you want to get?"), reply_markup=kb.return_weather_or_forecast_keyboard())
     await Weather.weather_or_forecast.set()
     await state.update_data(location=message_str)
