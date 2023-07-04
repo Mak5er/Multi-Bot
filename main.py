@@ -34,6 +34,7 @@ if __name__ == '__main__':
     from handlers.random_gen import dp
     from handlers.tasks import dp
     from handlers.entertaiment import dp
+    from handlers.admin import dp
 
     import keep_alive
 
