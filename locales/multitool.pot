@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-04 14:56+0300\n"
+"POT-Creation-Date: 2023-07-04 15:47+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,48 +29,48 @@ msgstr ""
 msgid "Hi, this is the entertainment section!"
 msgstr ""
 
-#: handlers/entertaiment.py:21 handlers/entertaiment.py:29
+#: handlers/entertaiment.py:20 handlers/entertaiment.py:28
 msgid "Yay, I scored!"
 msgstr ""
 
-#: handlers/entertaiment.py:23
+#: handlers/entertaiment.py:22
 msgid "Uhm..."
 msgstr ""
 
-#: handlers/entertaiment.py:25 handlers/entertaiment.py:31
-#: handlers/entertaiment.py:35 handlers/entertaiment.py:55
+#: handlers/entertaiment.py:24 handlers/entertaiment.py:30
+#: handlers/entertaiment.py:34 handlers/entertaiment.py:59
 msgid "I missed :("
 msgstr ""
 
-#: handlers/entertaiment.py:37
+#: handlers/entertaiment.py:36
 msgid "Yay, I scored a strike!"
 msgstr ""
 
-#: handlers/entertaiment.py:40
+#: handlers/entertaiment.py:40 handlers/entertaiment.py:44
 msgid "I knocked down a *{dice_result}* bowling pin."
 msgstr ""
 
-#: handlers/entertaiment.py:45
+#: handlers/entertaiment.py:49
 msgid "Yay, I win!"
 msgstr ""
 
-#: handlers/entertaiment.py:47
+#: handlers/entertaiment.py:51
 msgid "Almost... :("
 msgstr ""
 
-#: handlers/entertaiment.py:49
+#: handlers/entertaiment.py:53
 msgid "I lost :("
 msgstr ""
 
-#: handlers/entertaiment.py:53
+#: handlers/entertaiment.py:57
 msgid "Into the apple!"
 msgstr ""
 
-#: handlers/entertaiment.py:58
+#: handlers/entertaiment.py:62
 msgid "I'm on the *{line}* line"
 msgstr ""
 
-#: handlers/entertaiment.py:61
+#: handlers/entertaiment.py:65
 msgid "The dice rolled *{dice_result}*"
 msgstr ""
 
@@ -297,7 +297,8 @@ msgid ""
 "🔢Random number - generate a random number\n"
 "🔐Generate password - generate a random password\n"
 "🎯Tasks - create and schedule tasks\n"
-"🌦Weather - view the weather"
+"🌦Weather - view the weather\n"
+"Entertainments🎮 - the entertainment section"
 msgstr ""
 
 #: venv/Lib/site-packages/click/_termui_impl.py:496

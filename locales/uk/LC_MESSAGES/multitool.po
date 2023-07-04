@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  7шшкк\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-04 14:56+0300\n"
+"POT-Creation-Date: 2023-07-04 15:47+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -26,48 +26,48 @@ msgstr ""
 msgid "Hi, this is the entertainment section!"
 msgstr "Привіт, це розділ розваг!"
 
-#: handlers/entertaiment.py:21 handlers/entertaiment.py:29
+#: handlers/entertaiment.py:20 handlers/entertaiment.py:28
 msgid "Yay, I scored!"
 msgstr "Ура, я забив!"
 
-#: handlers/entertaiment.py:23
+#: handlers/entertaiment.py:22
 msgid "Uhm..."
 msgstr "Емм..."
 
-#: handlers/entertaiment.py:25 handlers/entertaiment.py:31
-#: handlers/entertaiment.py:35 handlers/entertaiment.py:55
+#: handlers/entertaiment.py:24 handlers/entertaiment.py:30
+#: handlers/entertaiment.py:34 handlers/entertaiment.py:59
 msgid "I missed :("
 msgstr "Я промазав :("
 
-#: handlers/entertaiment.py:37
+#: handlers/entertaiment.py:36
 msgid "Yay, I scored a strike!"
 msgstr "Ура, я забив страйк!"
 
-#: handlers/entertaiment.py:40
+#: handlers/entertaiment.py:40 handlers/entertaiment.py:44
 msgid "I knocked down a *{dice_result}* bowling pin."
 msgstr "Я збив стільки кегль: *{dice_result}* "
 
-#: handlers/entertaiment.py:45
+#: handlers/entertaiment.py:49
 msgid "Yay, I win!"
 msgstr "Ура, я виграв!"
 
-#: handlers/entertaiment.py:47
+#: handlers/entertaiment.py:51
 msgid "Almost... :("
 msgstr "Майже... :("
 
-#: handlers/entertaiment.py:49
+#: handlers/entertaiment.py:53
 msgid "I lost :("
 msgstr "Я програв :("
 
-#: handlers/entertaiment.py:53
+#: handlers/entertaiment.py:57
 msgid "Into the apple!"
 msgstr "В яблучко!"
 
-#: handlers/entertaiment.py:58
+#: handlers/entertaiment.py:62
 msgid "I'm on the *{line}* line"
 msgstr "Я попав на лінію: *{line}*"
 
-#: handlers/entertaiment.py:61
+#: handlers/entertaiment.py:65
 msgid "The dice rolled *{dice_result}*"
 msgstr "На кубику випало *{dice_result}*"
 
@@ -309,17 +309,19 @@ msgid ""
 "🔢Random number - generate a random number\n"
 "🔐Generate password - generate a random password\n"
 "🎯Tasks - create and schedule tasks\n"
-"🌦Weather - view the weather"
+"🌦Weather - view the weather\n"
+"Entertainments🎮 - the entertainment section"
 msgstr ""
 "🤖 Це бот-мультитул, який може виконувати різноманітні завдання. Ось "
 "список доступних функцій:\n"
 "\n"
 "️/start - початок взаємодії з ботом\n"
-"QR code - згенерувати QR-код\n"
-"🔢Random number - згенерувати випадкове число\n"
-"🔐Generate password - згенерувати пароль\n"
-"🎯Tasks - створити та планувати завдання\n"
-"🌦Weather - переглянути погоду"
+"QR код - згенерувати QR-код\n"
+"🔢Випадкове число - згенерувати випадкове число\n"
+"🔐згенерувати пароль - згенерувати надійний пароль\n"
+"🎯Задачі - створити та планувати завдання\n"
+"🌦Погода - переглянути погоду\n"
+"Розваги🎮 - секція розваг"
 
 #: venv/Lib/site-packages/click/_termui_impl.py:496
 msgid "{editor}: Editing failed"

@@ -22,4 +22,5 @@ QR code - generate a QR code
 🔢Random number - generate a random number
 🔐Generate password - generate a random password
 🎯Tasks - create and schedule tasks
-🌦Weather - view the weather""")
+🌦Weather - view the weather
+Entertainments🎮 - the entertainment section""")

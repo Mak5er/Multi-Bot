@@ -34,6 +34,11 @@ async def entertainment(message: types.Message):
             await message.answer(text=_("I missed :("))
         elif dice_result == 6:
             await message.answer(text=_("Yay, I scored a strike!"))
+        elif dice_result == 2:
+            dice_result = dice_result - 1
+            await message.answer(
+                text=_("I knocked down a *{dice_result}* bowling pin.").format(dice_result=dice_result),
+                parse_mode='Markdown')
         else:
             await message.answer(
                 text=_("I knocked down a *{dice_result}* bowling pin.").format(dice_result=dice_result),
