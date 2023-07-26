@@ -6,6 +6,7 @@ import time
 app = Flask('')
 
 import flask.cli
+
 flask.cli.show_server_banner = lambda *args: None
 
 
@@ -22,6 +23,7 @@ def keep_alive():
     server = Thread(target=run)
     server.start()
 
+
 def crawl_page(url):
     try:
         response = requests.get(url)
@@ -32,10 +34,12 @@ def crawl_page(url):
     except requests.exceptions.RequestException as e:
         print(f"Помилка: {e}")
 
+
 def run_crawler(url, interval):
     while True:
         crawl_page(url)
         time.sleep(interval)
+
 
 def start_crawling():
     urls = ["https://joke-bot.mak5er.repl.co/", "https://multi-bot.mak5er.repl.co/"]

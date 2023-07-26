@@ -1,14 +1,16 @@
+import asyncio
+import datetime
 import json
 
-from keyboards import keyboards as kb
-from main import dp, bot, _
-from aiogram import types
 import requests
-import datetime
+from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
-from services import DataBase
+
 import handlers.users as hu
+from keyboards import keyboards as kb
+from main import dp, bot, _
+from services import DataBase
 
 WEATHER_API_KEY = "5a790b0dd84fd7bf42f2b82544390aa9"
 
@@ -30,7 +32,6 @@ async def send_location(message: types.Message, state: FSMContext):
     message_str = message.location
     print(message_str)
 
-
     await message.answer(_("What do you want to get?"), reply_markup=kb.return_weather_or_forecast_keyboard())
     await Weather.weather_or_forecast.set()
     await state.update_data(location=message_str)
@@ -47,6 +48,11 @@ async def send_weather(message: types.Message, state: FSMContext):
     language = await db.get_language(user_id)
     data = await state.get_data()
     location = data["location"]
+
+    wait_message = await bot.send_message(message.chat.id, "⏳", reply_markup=types.ReplyKeyboardRemove())
+
+    await asyncio.sleep(1)
+
     if message.text == _('Current weather'):
         response = requests.get(
             f'http://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f&lang={language}&appid=%s' % (
@@ -87,5 +93,6 @@ async def send_weather(message: types.Message, state: FSMContext):
             print(response.status_code)
             await bot.send_message(message.chat.id, _('Something went wrong, try again, please'),
                                    reply_markup=kb.return_select_keyboard())
+    await bot.delete_message(chat_id=message.chat.id, message_id=wait_message.message_id)
 
     await state.finish()

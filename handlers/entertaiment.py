@@ -1,6 +1,9 @@
-from main import dp, _, bot
+import asyncio
+
 from aiogram import types
+
 from keyboards import keyboards as kb
+from main import dp, _, bot
 
 
 @dp.message_handler(text=['Entertainments🎮', 'Розваги🎮'])
@@ -15,6 +18,9 @@ async def entertainment(message: types.Message):
     result: types.Message = await bot.send_dice(message.chat.id, emoji=f'{message.text}',
                                                 allow_sending_without_reply=True)
     dice_result = result.dice.value
+
+    await asyncio.sleep(4.5)
+
     if message.text in ['Basketball🏀', "Баскетбол🏀"]:
         if dice_result in [5, 4]:
             await message.answer(text=_("Yay, I scored!"))

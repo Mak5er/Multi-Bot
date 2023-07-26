@@ -1,3 +1,4 @@
+import asyncio
 import os
 
 import segno
@@ -5,8 +6,8 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from segno import helpers
-import handlers.users as hu
 
+import handlers.users as hu
 from keyboards import keyboards as kb
 from main import dp, bot, _
 
@@ -112,6 +113,12 @@ async def qenerate_qr(call: types.CallbackQuery, state: FSMContext):
         await state.update_data(**data)
         return
 
+    await bot.delete_message(call.message.chat.id, call.message.message_id)
+
+    wait_message = await bot.send_message(call.message.chat.id, "⏳", reply_markup=types.ReplyKeyboardRemove())
+
+    await asyncio.sleep(1)
+
     if link_type == _("Simple QR code"):
         url = data.get('url')
         qr_code_path = f"{call.message.from_user.id}_qr_code.png"
@@ -128,7 +135,7 @@ async def qenerate_qr(call: types.CallbackQuery, state: FSMContext):
         qrcode = segno.make(config, error='h')
         qrcode.save(qr_code_path, scale=12, dark=fg_color, light=bg_color)
 
-    await bot.delete_message(call.message.chat.id, call.message.message_id)
+    await bot.delete_message(chat_id=call.message.chat.id, message_id=wait_message.message_id)
 
     with open(f"{call.message.from_user.id}_qr_code.png", 'rb') as qr_code_file:
         await bot.send_photo(call.message.chat.id, qr_code_file, caption=_("Scan the QR code"),

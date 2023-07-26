@@ -2,7 +2,6 @@ from aiogram import types
 from main import bot, dp, _
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import StatesGroup, State
-from aiogram.utils import executor
 from services import DataBase
 from keyboards import keyboards as kb
 
@@ -45,7 +44,7 @@ async def return_notes(message, user_id):
 async def list_notes(message: types.Message):
     user_id = message.from_user.id
 
-    await message.reply('Hi, here are your notes!', reply_markup=kb.return_menu_keyboard())
+    await message.reply(_('Hi, here are your tasks!'), reply_markup=kb.return_menu_keyboard())
     await return_notes(message, user_id)
 
 
@@ -108,7 +107,3 @@ async def add_note_message(message: types.Message, state: FSMContext):
     await message.reply(_("Task added."))
     await return_notes(message, user_id)
     await state.finish()
-
-
-if __name__ == '__main__':
-    executor.start_polling(dp, skip_updates=True)

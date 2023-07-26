@@ -1,10 +1,13 @@
+import asyncio
 import random
-from main import dp, _
+
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
-from keyboards import keyboards as kb
+
 import handlers.users as hu
+from keyboards import keyboards as kb
+from main import dp, _, bot
 
 
 class GeneratePass(StatesGroup):
@@ -26,7 +29,6 @@ async def generate_password(message: types.Message, state: FSMContext):
         return
     pass_len = message.text
     await state.finish()
-    print(pass_len)
     flag = True
     try:
         int(pass_len)
@@ -40,9 +42,16 @@ async def generate_password(message: types.Message, state: FSMContext):
         lenght = int(pass_len)
 
         password = ""
+        wait_message = await bot.send_message(message.chat.id, "⏳", reply_markup=types.ReplyKeyboardRemove())
+
+        await asyncio.sleep(1)
+
         for i in range(lenght):
             password += random.choice(chars)
         print(password)
+
+        await bot.delete_message(chat_id=message.chat.id, message_id=wait_message.message_id)
+
         await message.answer(_('Here are your password:\n\n `{password}`').format(password=password),
                              parse_mode='Markdown',
                              reply_markup=kb.return_select_keyboard())
@@ -66,10 +75,17 @@ async def generate_num(message: types.Message, state: FSMContext):
         await hu.send_welcome(message)
         return
     try:
+        wait_message = await bot.send_message(message.chat.id, "⏳", reply_markup=types.ReplyKeyboardRemove())
+
+        await asyncio.sleep(1)
+
         first_num = int(message.text.split('-')[0])
         second_num = int(message.text.split('-')[1])
         number = random.randint(first_num, second_num)
         await state.finish()
+
+        await bot.delete_message(chat_id=message.chat.id, message_id=wait_message.message_id)
+
         await message.answer(_('Your number is `{number}`').format(number=number), parse_mode='Markdown',
                              reply_markup=kb.return_select_keyboard())
     except:
