@@ -10,6 +10,8 @@ from middlewares import setup_middleware
 
 logging.basicConfig(level=logging.INFO)
 
+logging.getLogger("werkzeug").disabled = True
+
 bot = Bot(token=config.token)
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
@@ -39,4 +41,5 @@ if __name__ == '__main__':
     import keep_alive
 
     keep_alive.keep_alive()
+    keep_alive.start_crawling()
     executor.start_polling(dp, skip_updates=True, on_startup=on_startup, on_shutdown=on_shutdown)
