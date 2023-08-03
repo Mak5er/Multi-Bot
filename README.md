@@ -28,8 +28,8 @@ After successfully launching the program and connecting the bot to Telegram, you
 
 ### Administrator
 
-    Comming soon...
-
+    Sending messages on behalf of the bot to all users.
+    Ban/unban users from admin pannel.
 
 ## Database
 

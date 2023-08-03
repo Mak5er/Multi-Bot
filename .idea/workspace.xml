@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="45f3c4bd-028b-48ee-aed5-2c1c025d2f26" name="Changes" comment="ADD administration system" />
+    <list default="true" id="45f3c4bd-028b-48ee-aed5-2c1c025d2f26" name="Changes" comment="remove venv">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,7 +50,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "admin-functions",
+    "git-widget-placeholder": "master",
     "last_opened_file_path": "C:/Python/Multi Bot",
     "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
   }
@@ -59,8 +61,8 @@
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
-        <env name="admin_id" value="6013011895" />
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="admin_id" value="6013011895" />
         <env name="token" value="6193528095:AAGoFDTny4dhZesdf5BYuRsPohG-LgJYkvo" />
       </envs>
       <option name="SDK_HOME" value="" />
@@ -166,7 +168,23 @@
       <option name="project" value="LOCAL" />
       <updated>1691071987309</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="remove venv">
+      <option name="closed" value="true" />
+      <created>1691072151894</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1691072151894</updated>
+    </task>
+    <task id="LOCAL-00011" summary="remove venv">
+      <option name="closed" value="true" />
+      <created>1691072208152</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1691072208152</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -202,6 +220,7 @@
     <MESSAGE value="UPDATE" />
     <MESSAGE value="UPDATE README.md" />
     <MESSAGE value="ADD administration system" />
-    <option name="LAST_COMMIT_MESSAGE" value="ADD administration system" />
+    <MESSAGE value="remove venv" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove venv" />
   </component>
 </project>
