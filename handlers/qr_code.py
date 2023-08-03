@@ -5,6 +5,7 @@ import segno
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
+from middlewares.throttling_middleware import rate_limit
 from segno import helpers
 
 import handlers.users as hu
@@ -20,7 +21,7 @@ class GenerateQRCode(StatesGroup):
     waiting_for_bg_color = State()
     waiting_for_generate = State()
 
-
+@rate_limit(1)
 @dp.message_handler(text=["QR code", "QR код"])
 async def get_url_type(message: types.Message):
     await message.answer(_("Choose the type of QR code:"), reply_markup=kb.return_qr_type_keyboard())

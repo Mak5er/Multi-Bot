@@ -10,6 +10,7 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 import handlers.users as hu
 from keyboards import keyboards as kb
 from main import dp, bot, _
+from middlewares.throttling_middleware import rate_limit
 from services import DataBase
 
 WEATHER_API_KEY = "5a790b0dd84fd7bf42f2b82544390aa9"
@@ -22,11 +23,13 @@ class Weather(StatesGroup):
     weather_or_forecast = State()
 
 
+@rate_limit(1)
 @dp.message_handler(text=["🌦Weather", "🌦Погода"])
 async def get_url_type(message: types.Message):
     await message.answer(_("Please share your location"), reply_markup=kb.return_location_keyboard())
 
 
+@rate_limit(1)
 @dp.message_handler(content_types=['location'])
 async def send_location(message: types.Message, state: FSMContext):
     message_str = message.location

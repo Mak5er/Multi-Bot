@@ -104,3 +104,52 @@ def return_entertainment_keyboard():
     entertainment_keyboard.add(basket_button, casino_button, football_button)
     entertainment_keyboard.add(menu_button)
     return entertainment_keyboard
+
+
+def cancel_keyboard():
+    cancel_keyboard = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
+    cancel = KeyboardButton(_("↩️Cancel"))
+    cancel_keyboard.add(cancel)
+    return cancel_keyboard
+
+
+def admin_keyboard():
+    admin_keyboard = InlineKeyboardMarkup()
+    send_to_all_button = InlineKeyboardButton(
+        text=_('💬Mailing'), callback_data='send_to_all')
+    control_user_button = InlineKeyboardButton(text=_("👤Control User"),
+                                               callback_data='control_user')
+
+    admin_keyboard.row(send_to_all_button)
+    admin_keyboard.row(control_user_button)
+    return admin_keyboard
+
+
+def return_search_keyboard():
+    search_keyboard = InlineKeyboardMarkup()
+    id_button = InlineKeyboardButton(text="ID", callback_data="search_id")
+    username_button = InlineKeyboardButton(text="Username", callback_data="search_username")
+    search_keyboard.row(username_button, id_button)
+    return search_keyboard
+
+
+def return_back_to_admin_keyboard():
+    keyboard = InlineKeyboardMarkup(row_width=2)
+    back_button = InlineKeyboardButton(text=_("🔙Back"), callback_data="back_to_admin")
+    keyboard.row(back_button)
+    return keyboard
+
+
+def return_feedback_button():
+    keyboard = InlineKeyboardMarkup(row_width=2)
+    feedback_button = InlineKeyboardButton(text=_("Feedback💬"), callback_data='feedback')
+    keyboard.row(feedback_button)
+    return keyboard
+
+
+def feedback_answer(feedback_message_id, feedback_message_chat_id):
+    keyboard = InlineKeyboardMarkup(row_width=2)
+    answer_button = InlineKeyboardButton(text=_("Answer💬"),
+                                         callback_data=f'answer_{feedback_message_id}_{feedback_message_chat_id}')
+    keyboard.row(answer_button)
+    return keyboard

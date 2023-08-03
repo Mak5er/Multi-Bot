@@ -1,9 +1,11 @@
 from aiogram import types
-from main import bot, dp, _
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import StatesGroup, State
-from services import DataBase
+
 from keyboards import keyboards as kb
+from main import bot, dp, _
+from middlewares.throttling_middleware import rate_limit
+from services import DataBase
 
 db = DataBase('services/users.db')
 
@@ -40,6 +42,7 @@ async def return_notes(message, user_id):
         await bot.send_message(chat_id=message.chat.id, text=_("You haven't tasks."), reply_markup=keyboard)
 
 
+@rate_limit(1)
 @dp.message_handler(text=['🎯Tasks', '🎯Задачі'])
 async def list_notes(message: types.Message):
     user_id = message.from_user.id
@@ -48,6 +51,7 @@ async def list_notes(message: types.Message):
     await return_notes(message, user_id)
 
 
+@rate_limit(1)
 @dp.callback_query_handler(lambda call: call.data.startswith('manage_note:'))
 async def manage_note_callback(call: types.CallbackQuery):
     note_id = int(call.data.split(':')[1])
@@ -65,6 +69,7 @@ async def manage_note_callback(call: types.CallbackQuery):
                                     reply_markup=keyboard)
 
 
+@rate_limit(1)
 @dp.callback_query_handler(lambda call: call.data == 'add_note')
 async def add_note_callback(call: types.CallbackQuery):
     await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
@@ -73,6 +78,7 @@ async def add_note_callback(call: types.CallbackQuery):
     await Notes.add_note.set()
 
 
+@rate_limit(1)
 @dp.callback_query_handler(lambda call: call.data.startswith('delete_note:'))
 async def delete_note_callback(call: types.CallbackQuery):
     note_id = int(call.data.split(':')[1])
@@ -87,6 +93,7 @@ async def delete_note_callback(call: types.CallbackQuery):
     await bot.answer_callback_query(call.id)
 
 
+@rate_limit(1)
 @dp.callback_query_handler(lambda call: call.data == 'back_to_list')
 async def back_to_list_callback(call: types.CallbackQuery):
     user_id = call.from_user.id

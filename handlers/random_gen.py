@@ -8,6 +8,7 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 import handlers.users as hu
 from keyboards import keyboards as kb
 from main import dp, _, bot
+from middlewares.throttling_middleware import rate_limit
 
 
 class GeneratePass(StatesGroup):
@@ -15,6 +16,7 @@ class GeneratePass(StatesGroup):
     num_length = State()
 
 
+@rate_limit(1)
 @dp.message_handler(text=['🔐Generate password', '🔐Згенерувати пароль'])
 async def password_generator_handler(message: types.Message):
     await message.answer(_("Please enter password length: "), reply_markup=kb.return_menu_keyboard())
@@ -28,6 +30,11 @@ async def generate_password(message: types.Message, state: FSMContext):
         await hu.send_welcome(message)
         return
     pass_len = message.text
+    if int(pass_len) >= 4001:
+        await message.reply(_("Password can't be greater than 4000 symbols"))
+        await state.finish()
+        await GeneratePass.pass_len.set()
+        return
     await state.finish()
     flag = True
     try:
@@ -48,7 +55,6 @@ async def generate_password(message: types.Message, state: FSMContext):
 
         for i in range(lenght):
             password += random.choice(chars)
-        print(password)
 
         await bot.delete_message(chat_id=message.chat.id, message_id=wait_message.message_id)
 
