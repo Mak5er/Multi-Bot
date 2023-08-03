@@ -5,28 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="45f3c4bd-028b-48ee-aed5-2c1c025d2f26" name="Changes" comment="UPDATE">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Multi Bot.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/MultiTool.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/entertaiment.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/entertaiment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/qr_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/qr_code.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/random_gen.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/random_gen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/tasks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/users.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/users.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/voice.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/weather.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/weather.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/keep_alive.py" beforeDir="false" afterPath="$PROJECT_DIR$/keep_alive.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/en/LC_MESSAGES/multitool.mo" beforeDir="false" afterPath="$PROJECT_DIR$/locales/en/LC_MESSAGES/multitool.mo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/en/LC_MESSAGES/multitool.po" beforeDir="false" afterPath="$PROJECT_DIR$/locales/en/LC_MESSAGES/multitool.po" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/multitool.pot" beforeDir="false" afterPath="$PROJECT_DIR$/locales/multitool.pot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/uk/LC_MESSAGES/multitool.mo" beforeDir="false" afterPath="$PROJECT_DIR$/locales/uk/LC_MESSAGES/multitool.mo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/uk/LC_MESSAGES/multitool.po" beforeDir="false" afterPath="$PROJECT_DIR$/locales/uk/LC_MESSAGES/multitool.po" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/users.db" beforeDir="false" afterPath="$PROJECT_DIR$/services/users.db" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,33 +14,40 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 6
+}]]></component>
   <component name="ProjectId" id="2Rvnz2bVxF0Vi6CixJAdNVnoGUA" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Python/Multi Bot&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Python/Multi Bot"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Multi Bot" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
-        <env name="admin_ids" value="6013011895" />
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="admin_ids" value="6013011895" />
         <env name="token" value="6193528095:AAGoFDTny4dhZesdf5BYuRsPohG-LgJYkvo" />
       </envs>
       <option name="SDK_HOME" value="" />
@@ -112,7 +99,31 @@
       <option name="project" value="LOCAL" />
       <updated>1688141257064</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="UPDATE">
+      <option name="closed" value="true" />
+      <created>1691063326427</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1691063326427</updated>
+    </task>
+    <task id="LOCAL-00005" summary="UPDATE">
+      <option name="closed" value="true" />
+      <created>1691063469036</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1691063469036</updated>
+    </task>
+    <task id="LOCAL-00006" summary="UPDATE">
+      <option name="closed" value="true" />
+      <created>1691063490314</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1691063490314</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
