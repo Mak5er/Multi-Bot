@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-26 17:00+0300\n"
+"POT-Creation-Date: 2023-08-03 17:11+0300\n"
 "PO-Revision-Date: 2023-06-29 22:25+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -18,230 +18,279 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: main.py:25
+#: main.py:29
 msgid "I'm stopped!"
 msgstr ""
 
-#: main.py:29
+#: main.py:33
 msgid "I'm launched!"
 msgstr ""
 
-#: handlers/entertaiment.py:8
+#: handlers/admin.py:68 handlers/admin.py:118 handlers/admin.py:213
+#: handlers/admin.py:323 handlers/admin.py:359 handlers/users.py:81
+#: keyboards/keyboards.py:111
+msgid "↩️Cancel"
+msgstr ""
+
+#: handlers/admin.py:97
+msgid "Search user by:"
+msgstr ""
+
+#: handlers/admin.py:104
+msgid "Type user {search}:"
+msgstr ""
+
+#: handlers/admin.py:159
+msgid "Enter in Conversation"
+msgstr ""
+
+#: handlers/admin.py:160
+msgid "Write as a bot"
+msgstr ""
+
+#: handlers/admin.py:161
+msgid "❌Ban"
+msgstr ""
+
+#: handlers/admin.py:162
+msgid "✅Unban"
+msgstr ""
+
+#: handlers/admin.py:163 handlers/tasks.py:64 keyboards/keyboards.py:138
+msgid "🔙Back"
+msgstr ""
+
+#: handlers/admin.py:192
+msgid "User not found!"
+msgstr ""
+
+#: handlers/admin.py:202
+msgid "Enter ban reason:"
+msgstr ""
+
+#: handlers/admin.py:214 handlers/admin.py:324 handlers/admin.py:360
+#: handlers/users.py:83
+msgid "Action canceled!"
+msgstr ""
+
+#: handlers/admin.py:314
+msgid "Please type your answer:"
+msgstr ""
+
+#: handlers/admin.py:334
+msgid ""
+"Your message *{message_id}* was seen!\n"
+"*Answer:* `{answer}`"
+msgstr ""
+
+#: handlers/admin.py:336
+msgid "Your answer sent!"
+msgstr ""
+
+#: handlers/admin.py:340 handlers/admin.py:379
+msgid "Something went wrong, see log for more information!"
+msgstr ""
+
+#: handlers/admin.py:350
+msgid "Please type message:"
+msgstr ""
+
+#: handlers/admin.py:370 handlers/admin.py:374
+msgid "Your message sent!"
+msgstr ""
+
+#: handlers/entertaiment.py:13
 msgid "Hi, this is the entertainment section!"
 msgstr ""
 
-#: handlers/entertaiment.py:20 handlers/entertaiment.py:28
+#: handlers/entertaiment.py:29 handlers/entertaiment.py:37
 msgid "Yay, I scored!"
 msgstr ""
 
-#: handlers/entertaiment.py:22
+#: handlers/entertaiment.py:31
 msgid "Uhm..."
 msgstr ""
 
-#: handlers/entertaiment.py:24 handlers/entertaiment.py:30
-#: handlers/entertaiment.py:34 handlers/entertaiment.py:59
+#: handlers/entertaiment.py:33 handlers/entertaiment.py:39
+#: handlers/entertaiment.py:43 handlers/entertaiment.py:68
 msgid "I missed :("
 msgstr ""
 
-#: handlers/entertaiment.py:36
+#: handlers/entertaiment.py:45
 msgid "Yay, I scored a strike!"
 msgstr ""
 
-#: handlers/entertaiment.py:40 handlers/entertaiment.py:44
+#: handlers/entertaiment.py:49 handlers/entertaiment.py:53
 msgid "I knocked down a *{dice_result}* bowling pin."
 msgstr ""
 
-#: handlers/entertaiment.py:49
+#: handlers/entertaiment.py:58
 msgid "Yay, I win!"
 msgstr ""
 
-#: handlers/entertaiment.py:51
+#: handlers/entertaiment.py:60
 msgid "Almost... :("
 msgstr ""
 
-#: handlers/entertaiment.py:53
+#: handlers/entertaiment.py:62
 msgid "I lost :("
 msgstr ""
 
-#: handlers/entertaiment.py:57
+#: handlers/entertaiment.py:66
 msgid "Into the apple!"
 msgstr ""
 
-#: handlers/entertaiment.py:62
+#: handlers/entertaiment.py:71
 msgid "I'm on the *{line}* line"
 msgstr ""
 
-#: handlers/entertaiment.py:65
+#: handlers/entertaiment.py:74
 msgid "The dice rolled *{dice_result}*"
 msgstr ""
 
-#: handlers/qr_code.py:25
+#: handlers/qr_code.py:27
 msgid "Choose the type of QR code:"
 msgstr ""
 
-#: handlers/qr_code.py:32 handlers/qr_code.py:48 handlers/qr_code.py:60
-#: handlers/qr_code.py:72 handlers/qr_code.py:84 handlers/random_gen.py:23
-#: handlers/random_gen.py:64 handlers/weather.py:41 keyboards/keyboards.py:15
-#: keyboards/keyboards.py:58 keyboards/keyboards.py:68
-#: keyboards/keyboards.py:81 keyboards/keyboards.py:90
-#: keyboards/keyboards.py:103
+#: handlers/qr_code.py:34 handlers/qr_code.py:50 handlers/qr_code.py:62
+#: handlers/qr_code.py:74 handlers/qr_code.py:86 handlers/random_gen.py:28
+#: handlers/random_gen.py:79 handlers/weather.py:45 keyboards/keyboards.py:15
+#: keyboards/keyboards.py:57 keyboards/keyboards.py:67
+#: keyboards/keyboards.py:80 keyboards/keyboards.py:89
+#: keyboards/keyboards.py:102
 msgid "📂Menu"
 msgstr ""
 
-#: handlers/qr_code.py:37 handlers/qr_code.py:115 keyboards/keyboards.py:13
+#: handlers/qr_code.py:39 handlers/qr_code.py:123 keyboards/keyboards.py:13
 msgid "Simple QR code"
 msgstr ""
 
-#: handlers/qr_code.py:38
+#: handlers/qr_code.py:40
 msgid "Enter URL:"
 msgstr ""
 
-#: handlers/qr_code.py:40 handlers/qr_code.py:122 keyboards/keyboards.py:14
+#: handlers/qr_code.py:42 handlers/qr_code.py:130 keyboards/keyboards.py:14
 msgid "Wi-Fi QR-code"
 msgstr ""
 
-#: handlers/qr_code.py:41
+#: handlers/qr_code.py:43
 msgid "Enter the Wi-Fi network name:"
 msgstr ""
 
-#: handlers/qr_code.py:53
+#: handlers/qr_code.py:55
 msgid "Enter Wi-Fi password:"
 msgstr ""
 
-#: handlers/qr_code.py:65 handlers/qr_code.py:77 handlers/qr_code.py:110
+#: handlers/qr_code.py:67 handlers/qr_code.py:79 handlers/qr_code.py:112
 msgid "Select the color of the QR code."
 msgstr ""
 
-#: handlers/qr_code.py:93
+#: handlers/qr_code.py:95
 msgid "Now choose a background color."
 msgstr ""
 
-#: handlers/qr_code.py:109
+#: handlers/qr_code.py:111
 msgid "You can't choose the same color twice! Choose the colors again."
 msgstr ""
 
-#: handlers/qr_code.py:134
+#: handlers/qr_code.py:142
 msgid "Scan the QR code"
 msgstr ""
 
-#: handlers/random_gen.py:17
+#: handlers/random_gen.py:22
 msgid "Please enter password length: "
 msgstr ""
 
-#: handlers/random_gen.py:46
+#: handlers/random_gen.py:34
+msgid "Password can't be greater than 4000 symbols"
+msgstr ""
+
+#: handlers/random_gen.py:61
 msgid ""
 "Here are your password:\n"
 "\n"
 " `{password}`"
 msgstr ""
 
-#: handlers/random_gen.py:50
+#: handlers/random_gen.py:65
 msgid "Please enter a number: "
 msgstr ""
 
-#: handlers/random_gen.py:57
+#: handlers/random_gen.py:72
 msgid "Hi enter range of numbers by -, or select one from examples."
 msgstr ""
 
-#: handlers/random_gen.py:73
+#: handlers/random_gen.py:95
 msgid "Your number is `{number}`"
 msgstr ""
 
-#: handlers/random_gen.py:76
+#: handlers/random_gen.py:98
 msgid "Please enter correct numbers: "
 msgstr ""
 
-#: handlers/tasks.py:19
+#: handlers/tasks.py:21
 msgid ""
 "*Your tasks:*\n"
 "\n"
 msgstr ""
 
-#: handlers/tasks.py:31 handlers/tasks.py:37
+#: handlers/tasks.py:33 handlers/tasks.py:39
 msgid "➕Add task"
 msgstr ""
 
-#: handlers/tasks.py:40
+#: handlers/tasks.py:42
 msgid "You haven't tasks."
 msgstr ""
 
-#: handlers/tasks.py:47
+#: handlers/tasks.py:50
 msgid "Hi, here are your tasks!"
 msgstr ""
 
-#: handlers/tasks.py:59
+#: handlers/tasks.py:63
 msgid "❌Delete"
 msgstr ""
 
-#: handlers/tasks.py:60
-msgid "🔙Back"
-msgstr ""
-
-#: handlers/tasks.py:71
+#: handlers/tasks.py:76
 msgid "Enter your task:"
 msgstr ""
 
-#: handlers/tasks.py:85
+#: handlers/tasks.py:91
 msgid "Task deleted."
 msgstr ""
 
-#: handlers/tasks.py:107
+#: handlers/tasks.py:114
 msgid "Task added."
 msgstr ""
 
-#: handlers/users.py:23
+#: handlers/users.py:29
 msgid "Hi! I'm your bot, Multitool."
 msgstr ""
 
-#: handlers/users.py:37
+#: handlers/users.py:49
 msgid "Please choose your language!"
 msgstr ""
 
-#: handlers/users.py:52 keyboards/keyboards.py:23
-msgid "QR code"
+#: handlers/users.py:68
+msgid "Please enter your message:"
 msgstr ""
 
-#: handlers/users.py:53 keyboards/keyboards.py:24
-msgid "🌦Weather"
+#: handlers/users.py:101
+msgid "Your message *{feedback_message_id}* sent!"
 msgstr ""
 
-#: handlers/users.py:54 keyboards/keyboards.py:25
-msgid "🎯Tasks"
-msgstr ""
-
-#: handlers/users.py:55 keyboards/keyboards.py:26
-msgid "🔐Generate password"
-msgstr ""
-
-#: handlers/users.py:56 keyboards/keyboards.py:27
-msgid "🔢Random number"
-msgstr ""
-
-#: handlers/users.py:57 keyboards/keyboards.py:28
-msgid "Entertainments🎮"
-msgstr ""
-
-#: handlers/users.py:58 keyboards/keyboards.py:29
-msgid "ℹ️INFO"
-msgstr ""
-
-#: handlers/users.py:59 keyboards/keyboards.py:30
-msgid "Language🌐"
-msgstr ""
-
-#: handlers/weather.py:25
+#: handlers/weather.py:29
 msgid "Please share your location"
 msgstr ""
 
-#: handlers/weather.py:34
+#: handlers/weather.py:38
 msgid "What do you want to get?"
 msgstr ""
 
-#: handlers/weather.py:50 keyboards/keyboards.py:66
+#: handlers/weather.py:59 keyboards/keyboards.py:65
 msgid "Current weather"
 msgstr ""
 
-#: handlers/weather.py:59
+#: handlers/weather.py:68
 #, python-format
 msgid ""
 "<b>Location: %s</b>\n"
@@ -250,15 +299,15 @@ msgid ""
 "Temperature: %s°C"
 msgstr ""
 
-#: handlers/weather.py:64 handlers/weather.py:88
+#: handlers/weather.py:73 handlers/weather.py:97
 msgid "Something went wrong, try again, please"
 msgstr ""
 
-#: handlers/weather.py:67 keyboards/keyboards.py:67
+#: handlers/weather.py:76 keyboards/keyboards.py:66
 msgid "Forecast for tomorrow"
 msgstr ""
 
-#: handlers/weather.py:82
+#: handlers/weather.py:91
 #, python-format
 msgid ""
 "<b>Forecast for %s</b>\n"
@@ -268,38 +317,82 @@ msgid ""
 "Temperature: %s°C"
 msgstr ""
 
-#: keyboards/keyboards.py:57
+#: keyboards/keyboards.py:23
+msgid "QR code"
+msgstr ""
+
+#: keyboards/keyboards.py:24
+msgid "🌦Weather"
+msgstr ""
+
+#: keyboards/keyboards.py:25
+msgid "🎯Tasks"
+msgstr ""
+
+#: keyboards/keyboards.py:26
+msgid "🔐Generate password"
+msgstr ""
+
+#: keyboards/keyboards.py:27
+msgid "🔢Random number"
+msgstr ""
+
+#: keyboards/keyboards.py:28
+msgid "Entertainments🎮"
+msgstr ""
+
+#: keyboards/keyboards.py:29
+msgid "ℹ️INFO"
+msgstr ""
+
+#: keyboards/keyboards.py:56
 msgid "📍Set your location"
 msgstr ""
 
-#: keyboards/keyboards.py:97
+#: keyboards/keyboards.py:96
 msgid "Bowling🎳"
 msgstr ""
 
-#: keyboards/keyboards.py:98
+#: keyboards/keyboards.py:97
 msgid "Darts🎯"
 msgstr ""
 
-#: keyboards/keyboards.py:99
+#: keyboards/keyboards.py:98
 msgid "Dice🎲"
 msgstr ""
 
-#: keyboards/keyboards.py:100
+#: keyboards/keyboards.py:99
 msgid "Basketball🏀"
 msgstr ""
 
-#: keyboards/keyboards.py:101
+#: keyboards/keyboards.py:100
 msgid "Casino🎰"
 msgstr ""
 
-#: keyboards/keyboards.py:102
+#: keyboards/keyboards.py:101
 msgid "Football⚽"
+msgstr ""
+
+#: keyboards/keyboards.py:119
+msgid "💬Mailing"
+msgstr ""
+
+#: keyboards/keyboards.py:120
+msgid "👤Control User"
+msgstr ""
+
+#: keyboards/keyboards.py:145
+msgid "Feedback💬"
+msgstr ""
+
+#: keyboards/keyboards.py:152
+msgid "Answer💬"
 msgstr ""
 
 #: messages/bot_messages.py:18
 msgid ""
-"🤖 This is a multi-tasking bot that can perform a variety of tasks. Here "
-"is a list of available functions:\n"
+"🤖This is a multi-tasking bot that can perform a variety of tasks. Here is"
+" a list of available functions:\n"
 "\n"
 "️/start - start interaction with the bot\n"
 "QR code - generate a QR code\n"
@@ -307,8 +400,334 @@ msgid ""
 "🔐Generate password - generate a random password\n"
 "🎯Tasks - create and schedule tasks\n"
 "🌦Weather - view the weather\n"
-"Entertainments🎮 - the entertainment section"
+"Entertainments🎮 - the entertainment section\n"
+"\n"
+"*If you want to make an offer or ask a question, click the Feedback💬 "
+"button!*"
 msgstr ""
+
+#: messages/bot_messages.py:32
+msgid ""
+"Hello, this is the admin panel.\n"
+"🪪Number of bot users: *{user_count}*\n"
+"\n"
+"Admin commands:\n"
+"/download\\_db - download database\n"
+"/get\\_users - download table with all users info"
+msgstr ""
+
+#: messages/bot_messages.py:41
+msgid ""
+"*USER INFO*\n"
+"_Name_: *{user_name}*\n"
+"_ID_: *{user_id}*\n"
+"_Username_: *{user_username}*\n"
+"_Status_: *{status}*"
+msgstr ""
+
+#: messages/bot_messages.py:49
+msgid "Mailing is complete!"
+msgstr ""
+
+#: messages/bot_messages.py:53
+msgid "Starting mailing..."
+msgstr ""
+
+#: messages/bot_messages.py:57
+msgid "Enter the message to send:"
+msgstr ""
+
+#: messages/bot_messages.py:61
+msgid "This command cannot be used in a group!"
+msgstr ""
+
+#: messages/bot_messages.py:65
+msgid "Action canceled"
+msgstr ""
+
+#: messages/bot_messages.py:69
+msgid ""
+"🚫You have been banned, contact @mak5er for more information!\n"
+"Reason: {reason}"
+msgstr ""
+
+#: messages/bot_messages.py:73
+msgid "🎉You have been unbanned!"
+msgstr ""
+
+#: messages/bot_messages.py:77
+msgid "User {banned_user_id} successfully banned!"
+msgstr ""
+
+#: messages/bot_messages.py:81
+msgid "User {unbanned_user_id} successfully unbanned!"
+msgstr ""
+
+#: messages/bot_messages.py:85
+msgid ""
+"*New message* from user: *{user}*\n"
+"*Message:* `{feedback_message}`"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/_termui_impl.py:518
+msgid "{editor}: Editing failed"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/_termui_impl.py:522
+msgid "{editor}: Editing failed: {e}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:1120
+msgid "Aborted!"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:1309
+#: venv/lib/python3.10/site-packages/click/decorators.py:559
+msgid "Show this message and exit."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:1340
+#: venv/lib/python3.10/site-packages/click/core.py:1370
+msgid "(Deprecated) {text}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:1387
+msgid "Options"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:1415
+msgid "Got unexpected extra argument ({args})"
+msgid_plural "Got unexpected extra arguments ({args})"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:1428
+msgid "DeprecationWarning: The command {name!r} is deprecated."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:1636
+msgid "Commands"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:1668
+msgid "Missing command."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:1746
+msgid "No such command {name!r}."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:2310
+msgid "Value must be an iterable."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:2333
+msgid "Takes {nargs} values but 1 was given."
+msgid_plural "Takes {nargs} values but {len} were given."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:2778
+msgid "env var: {var}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:2808
+msgid "(dynamic)"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:2821
+msgid "default: {default}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:2834
+msgid "required"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/decorators.py:465
+#, python-format
+msgid "%(prog)s, version %(version)s"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/decorators.py:528
+msgid "Show the version and exit."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/exceptions.py:44
+#: venv/lib/python3.10/site-packages/click/exceptions.py:80
+msgid "Error: {message}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/exceptions.py:72
+msgid "Try '{command} {option}' for help."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/exceptions.py:121
+msgid "Invalid value: {message}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/exceptions.py:123
+msgid "Invalid value for {param_hint}: {message}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/exceptions.py:179
+msgid "Missing argument"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/exceptions.py:181
+msgid "Missing option"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/exceptions.py:183
+msgid "Missing parameter"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/exceptions.py:185
+msgid "Missing {param_type}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/exceptions.py:192
+msgid "Missing parameter: {param_name}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/exceptions.py:212
+msgid "No such option: {name}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/exceptions.py:226
+msgid "Did you mean {possibility}?"
+msgid_plural "(Possible options: {possibilities})"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.10/site-packages/click/exceptions.py:262
+msgid "unknown error"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/exceptions.py:269
+msgid "Could not open file {filename!r}: {message}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/parser.py:231
+msgid "Argument {name!r} takes {nargs} values."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/parser.py:413
+msgid "Option {name!r} does not take a value."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/parser.py:473
+msgid "Option {name!r} requires an argument."
+msgid_plural "Option {name!r} requires {nargs} arguments."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.10/site-packages/click/shell_completion.py:317
+msgid "Shell completion is not supported for Bash versions older than 4.4."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/shell_completion.py:324
+msgid "Couldn't detect Bash version, shell completion is not supported."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/termui.py:158
+msgid "Repeat for confirmation"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/termui.py:174
+msgid "Error: The value you entered was invalid."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/termui.py:176
+msgid "Error: {e.message}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/termui.py:187
+msgid "Error: The two entered values do not match."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/termui.py:243
+msgid "Error: invalid input"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/termui.py:773
+msgid "Press any key to continue..."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:266
+msgid ""
+"Choose from:\n"
+"\t{choices}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:300
+msgid "{value!r} is not {choice}."
+msgid_plural "{value!r} is not one of {choices}."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:394
+msgid "{value!r} does not match the format {format}."
+msgid_plural "{value!r} does not match the formats {formats}."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:414
+msgid "{value!r} is not a valid {number_type}."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:470
+msgid "{value} is not in the range {range}."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:611
+msgid "{value!r} is not a valid boolean."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:635
+msgid "{value!r} is not a valid UUID."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:822
+msgid "file"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:824
+msgid "directory"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:826
+msgid "path"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:877
+msgid "{name} {filename!r} does not exist."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:886
+msgid "{name} {filename!r} is a file."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:894
+msgid "{name} '{filename}' is a directory."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:903
+msgid "{name} {filename!r} is not readable."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:912
+msgid "{name} {filename!r} is not writable."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:921
+msgid "{name} {filename!r} is not executable."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:987
+msgid "{len_type} values are required, but {len_value} was given."
+msgid_plural "{len_type} values are required, but {len_value} were given."
+msgstr[0] ""
+msgstr[1] ""
 
 #~ msgid ""
 #~ "🤖 This is a multi-tasking bot "
@@ -521,5 +940,23 @@ msgstr ""
 #~ msgstr[1] ""
 
 #~ msgid "Hi, here are your notes!"
+#~ msgstr ""
+
+#~ msgid "Language🌐"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "🤖 This is a multi-tasking bot "
+#~ "that can perform a variety of "
+#~ "tasks. Here is a list of available"
+#~ " functions:\n"
+#~ "\n"
+#~ "️/start - start interaction with the bot\n"
+#~ "QR code - generate a QR code\n"
+#~ "🔢Random number - generate a random number\n"
+#~ "🔐Generate password - generate a random password\n"
+#~ "🎯Tasks - create and schedule tasks\n"
+#~ "🌦Weather - view the weather\n"
+#~ "Entertainments🎮 - the entertainment section"
 #~ msgstr ""
 

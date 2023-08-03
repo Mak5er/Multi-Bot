@@ -1,0 +1,721 @@
+Index: handlers/admin.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from main import dp, bot\r\nfrom aiogram import types\r\nfrom config import admin_id\r\n\r\n\r\n@dp.message_handler(user_id=admin_id, commands=['download_db'])\r\nasync def download_db(message: types.Message):\r\n    await bot.send_chat_action(message.chat.id, \"typing\")\r\n    db_file = 'services/users.db'\r\n    with open(db_file, 'rb') as file:\r\n        await bot.send_document(message.chat.id, file)\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/handlers/admin.py b/handlers/admin.py
+--- a/handlers/admin.py	(revision 0469c04c57dc976eece1c75881fa78883fa88f17)
++++ b/handlers/admin.py	(date 1691066907132)
+@@ -1,11 +1,511 @@
+-from main import dp, bot
++import asyncio
++import logging
++import os
++from io import BytesIO
++
++import pandas as pd
+ from aiogram import types
+-from config import admin_id
++from aiogram.contrib.fsm_storage.memory import MemoryStorage
++from aiogram.dispatcher import FSMContext
++from aiogram.types import ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
++
++import config
++from keyboards import keyboards as kb
++from main import dp, bot, _
++from messages import bot_messages
++from messages import bot_messages as bm
++from middlewares.throttling_middleware import rate_limit
++from services import DataBase
++
++storage = MemoryStorage()
++
++db = DataBase('services/users.db')
++
++
++admin_id = config.admin_id
++
++
++@dp.message_handler(user_id=admin_id, commands=['admin'])
++@rate_limit(2)
++async def admin(message: types.Message):
++    await dp.bot.send_chat_action(message.chat.id, "typing")
++
++    if message.chat.type == 'private':
++        user_id = message.from_user.id
++        language = await db.get_language(user_id)
++
++        table_name = f"jokes_{language}"
++
++        logging.info(f"User action: /admin (User ID: {user_id})")
++
++        user_count = await db.user_count()
++        joke_count = await db.joke_count(table_name)
++        sent_count = await db.sent_count()
++
++        await message.answer(bot_messages.admin_panel(
++            user_count, joke_count, sent_count),
++            reply_markup=kb.admin_keyboard(), parse_mode='Markdown')
++    else:
++        await message.answer(bot_messages.not_groups())
++
++
++@dp.message_handler(user_id=admin_id, commands=['del_log'])
++@rate_limit(10)
++async def del_log(message: types.Message):
++    await dp.bot.send_chat_action(message.chat.id, "typing")
++    logging.shutdown()
++    open('log/bot_log.log', 'w').close()
++    await message.reply(bot_messages.log_deleted())
+ 
+ 
+ @dp.message_handler(user_id=admin_id, commands=['download_db'])
++@rate_limit(10)
+ async def download_db(message: types.Message):
+-    await bot.send_chat_action(message.chat.id, "typing")
+-    db_file = 'services/users.db'
++    await dp.bot.send_chat_action(message.chat.id, "typing")
++    user_id = message.from_user.id
++    db_file = 'services/jokes.db'
+     with open(db_file, 'rb') as file:
+         await bot.send_document(message.chat.id, file)
++        logging.info(
++            f"User action: Downloaded db (User ID: {user_id})")
++
++
++@dp.callback_query_handler(lambda call: call.data == 'download_log', user_id=admin_id)
++async def download_log_handler(call: types.CallbackQuery):
++    await dp.bot.send_chat_action(call.message.chat.id, "typing")
++
++    log_file = 'log/bot_log.log'
++    user_id = call.from_user.id
++
++    with open(log_file, 'rb') as file:
++        await bot.send_document(call.message.chat.id, file)
++        logging.info(f"User action: Downloaded log (User ID: {user_id})")
++        return
++
++
++@dp.callback_query_handler(lambda call: call.data == 'send_to_all')
++async def send_to_all_callback(call: types.CallbackQuery):
++    await bot.send_message(chat_id=call.message.chat.id,
++                           text=bot_messages.mailing_message(),
++                           reply_markup=kb.cancel_keyboard())
++    await dp.current_state().set_state("send_to_all_message")
++
++
++@dp.message_handler(state="send_to_all_message")
++async def send_to_all_message(message: types.Message, state: FSMContext):
++    sender_id = message.from_user.id
++    if message.text == _("↩️Cancel"):
++        await bot.send_message(message.chat.id, bot_messages.canceled(), reply_markup=types.ReplyKeyboardRemove())
++        await state.finish()
++        return
++    else:
++        await dp.bot.send_chat_action(message.chat.id, "typing")
++
++        users = await db.all_users()
++
++        for user in users:
++            try:
++                await bot.copy_message(chat_id=user[0],
++                                       from_chat_id=sender_id,
++                                       message_id=message.message_id,
++                                       parse_mode="Markdown")
++                logging.info(f"Sent message to user {user[0]}: {message.text}")
++            except Exception as e:
++                logging.error(
++                    f"Error sending message to user {user[0]}: {str(e)}")
++                continue
++        await bot.send_message(chat_id=message.chat.id,
++                               text=bot_messages.finish_mailing(), reply_markup=types.ReplyKeyboardRemove())
++        await state.finish()
++        return
++
++
++@dp.callback_query_handler(lambda call: call.data == 'add_joke')
++async def add_joke_handler(call: types.CallbackQuery):
++    await bot.send_message(chat_id=call.message.chat.id,
++                           text=bot_messages.new_joke(),
++                           reply_markup=kb.cancel_keyboard())
++    await dp.current_state().set_state("joke")
++
++
++@dp.message_handler(state="joke")
++async def save_joke(message: types.Message, state: FSMContext):
++    joke_text = message.text
++    if joke_text == _("↩️Cancel"):
++        await bot.send_message(chat_id=message.chat.id,
++                               text=bot_messages.canceled(),
++                               reply_markup=types.ReplyKeyboardRemove())
++        await state.finish()
++        return
++    else:
++        user_id = message.from_user.id
++        language = await db.get_language(user_id)
++
++        table_name = f"jokes_{language}"
++        await db.add_joke(joke_text, table_name)
++
++        await message.reply(bot_messages.joke_added(),
++                            reply_markup=types.ReplyKeyboardRemove())
++        await state.finish()
++        user_id = message.from_user.id
++        logging.info(
++            f"User action: Add joke (User ID: {user_id}), (Joke text: {message.text})"
++        )
++
++
++@dp.callback_query_handler(lambda call: call.data == 'daily_joke')
++async def send_daily_joke(call: types.CallbackQuery):
++    users = await db.get_private_users()
++    await bot.send_message(chat_id=admin_id, text=bot_messages.start_mailing())
++    for user in users:
++        chat_id = user[0]
++        try:
++
++            language = await db.get_language(chat_id)
++
++            table_name = f"jokes_{language}"
++
++            result = await db.get_joke(chat_id, table_name)
++
++            if not result:
++                continue
++
++            joke = result[0]
++            joke_text = joke[1]
++
++            await bot.send_message(
++                chat_id=user[0],
++                text=bot_messages.daily_joke(joke_text),
++                parse_mode="Markdown",
++                reply_markup=kb.return_rate_keyboard(joke[0]))
++
++            await db.seen_joke(joke[0], chat_id)
++
++            logging.info(f"Sent daily joke to user {chat_id}")
++        except Exception as e:
++            logging.error(f"Error sending message to user {chat_id}: {str(e)}")
++            continue
++
++    await bot.send_message(chat_id=admin_id, text=bot_messages.finish_mailing())
++
++
++@dp.callback_query_handler(lambda call: call.data == 'control_user')
++async def control_user_callback(call: types.CallbackQuery):
++    await bot.delete_message(call.message.chat.id, call.message.message_id)
++    await call.message.answer(text=_('Search user by:'), reply_markup=kb.return_search_keyboard())
++
++
++@dp.callback_query_handler(lambda call: call.data.startswith("search_"))
++async def search_user_by(call: types.CallbackQuery):
++    search = call.data.split('_')[1]
++    await bot.delete_message(call.message.chat.id, call.message.message_id)
++    await call.message.answer(text=_('Type user {search}:').format(search=search), reply_markup=kb.cancel_keyboard())
++
++    await dp.current_state().set_state("control_user")
++    await dp.current_state().update_data(search=search)
++
++
++@dp.message_handler(state="control_user")
++async def control_user(message: types.Message, state: FSMContext):
++    answer = message.text
++    answer = answer.replace("@", "")
++    answer = answer.replace("https://t.me/", "")
++    data = await state.get_data()
++    search = data.get("search")
++
++    if message.text == _("↩️Cancel"):
++        await bot.send_message(message.chat.id,
++                               'Action canceled!',
++                               reply_markup=ReplyKeyboardRemove())
++        await state.finish()
++        await admin(message)
++        return
++
++    else:
++        await dp.bot.send_chat_action(message.chat.id, "typing")
++
++        clock = await bot.send_message(message.chat.id, '⏳', reply_markup=ReplyKeyboardRemove())
++
++        await asyncio.sleep(2)
++
++        await bot.delete_message(message.chat.id, clock.message_id)
++
++        user = None
++
++        if search == "id":
++            user = await db.get_user_info(answer)
++
++        elif search == "username":
++            user = await db.get_user_info_username(answer)
++
++        result = user.fetchone()
++
++        if result is not None:
++            user_name = None
++            user_username = None
++            status = None
++            user_id = None
++
++            if search == "id":
++                user_name, user_username, status = result
++                user_id = answer
++
++            elif search == "username":
++                user_name, user_id, status = result
++                user_username = answer
++
++            go_to_chat = InlineKeyboardButton(text=_("Enter in Conversation"), url=f"tg://user?id={user_id}")
++            write_user = InlineKeyboardButton(text=_('Write as a bot'), callback_data=f"write_{user_id}")
++            ban_button = InlineKeyboardButton(text=_("❌Ban"), callback_data=f"ban_{user_id}")
++            unban_button = InlineKeyboardButton(text=_("✅Unban"), callback_data=f"unban_{user_id}")
++            back_button = InlineKeyboardButton(text=_("🔙Back"), callback_data="back_to_admin")
++            control_keyboard = InlineKeyboardMarkup()
++            control_keyboard.row(go_to_chat, write_user)
++
++            if user_username == "":
++                user_username = "None"
++            else:
++                user_username = f"@{user_username}"
++
++            user_photo = await bot.get_user_profile_photos(user_id, limit=1)
++
++            if status == 'user':
++                control_keyboard.row(ban_button)
++
++            elif status == 'ban':
++                control_keyboard.row(unban_button)
++
++            control_keyboard.row(back_button)
++
++            if user_photo.total_count > 0:
++                await message.reply_photo(user_photo.photos[0][-1].file_id,
++                                          caption=bm.return_user_info(user_name, user_id, user_username, status),
++                                          reply_markup=control_keyboard, parse_mode="Markdown")
++            else:
++                await bot.send_message(message.chat.id, bm.return_user_info(user_name, user_id, user_username, status),
++                                       reply_markup=control_keyboard, parse_mode="Markdown")
++            logging.info(f"Control user: {user_id}")
++
++        else:
++            await bot.send_message(message.chat.id, _("User not found!"))
++
++        await state.finish()
++
++
++@dp.callback_query_handler(lambda call: call.data.startswith("ban_"))
++async def message_handler(call: types.CallbackQuery):
++    banned_user_id = call.data.split("_")[1]
++
++    await call.message.delete()
++    await call.message.answer(_('Enter ban reason:'), reply_markup=kb.cancel_keyboard())
++    await dp.current_state().set_state("ban_reason")
++    await dp.current_state().update_data(banned_user_id=banned_user_id)
++
++
++@dp.message_handler(state="ban_reason")
++async def control_user(message: types.Message, state: FSMContext):
++    reason = message.text
++    data = await state.get_data()
++    banned_user_id = data.get("banned_user_id")
++
++    if message.text == _("↩️Cancel"):
++        await bot.send_message(message.chat.id, _('Action canceled!'),
++                               reply_markup=ReplyKeyboardRemove())
++        await state.finish()
++        await admin(message)
++        return
++
++    await db.ban_user(banned_user_id)
++
++    await state.finish()
++
++    await bot.send_message(chat_id=banned_user_id,
++                           text=bm.ban_message(reason),
++                           reply_markup=ReplyKeyboardRemove())
++
++    ban_message = await message.answer(bm.successful_ban(banned_user_id),
++                                       reply_markup=ReplyKeyboardRemove())
++
++    await bot.delete_message(message.chat.id, ban_message.message_id)
++
++    await message.answer(bm.successful_ban(banned_user_id), reply_markup=kb.return_back_to_admin_keyboard())
++
++    logging.info(f"Banned user: {banned_user_id} Reason: {reason}")
++
++
++@dp.callback_query_handler(lambda call: call.data.startswith("unban_"))
++async def message_handler(call: types.CallbackQuery):
++    unbanned_user_id = call.data.split("_")[1]
++
++    await db.unban_user(unbanned_user_id)
++
++    await bot.send_message(chat_id=unbanned_user_id,
++                           text=bm.unban_message())
++
++    await call.message.delete()
++
++    await call.message.answer(bm.successful_unban(unbanned_user_id),
++                              reply_markup=kb.return_back_to_admin_keyboard())
++
++    logging.info(f"Unbanned user: {unbanned_user_id}")
++
++
++@dp.message_handler(user_id=admin_id, commands=['info'])
++async def info(message: types.Message):
++    await dp.bot.send_chat_action(message.chat.id, "typing")
++
++    user_id = message.from_user.id
++    language = await db.get_language(user_id)
++
++    table_name = f"jokes_{language}"
++
++    logging.info(f"User action: /info (User ID: {user_id})")
++
++    joke_sent = await db.joke_sent(user_id)
++    joke_count = await db.joke_count(table_name)
++    sent_count = await db.sent_count()
++
++    username = message.from_user.first_name
++
++    await message.reply(
++        bot_messages.admin_info(username, joke_sent, joke_count, sent_count), reply_markup=kb.return_feedback_button(),
++        parse_mode='Markdown')
++
++
++@dp.message_handler(user_id=admin_id, commands=['get_users'])
++async def export_users_data(message: types.Message):
++    clock = await bot.send_message(message.chat.id, '⏳', reply_markup=ReplyKeyboardRemove())
++    users = await db.all_users()
++
++    for user in users:
++        chat_id = user[0]
++        user = await bot.get_chat(chat_id)
++        username = user.username if user.username else ""
++        full_name = user.full_name if user.full_name else ""
++        await db.user_update_name(chat_id, full_name, username)
++
++    await asyncio.sleep(2)
++
++    # Виконуємо запит для отримання всіх даних з таблиці users
++
++    users_data = await db.get_all_users_info()
++
++    # Створюємо DataFrame з даними користувачів
++    df = pd.DataFrame(users_data, columns=['user_id', 'chat_type', 'user_name', 'user_username', 'language', 'status'])
++
++    # Створюємо Excel-файл з даними
++    excel_file = BytesIO()
++    df.to_excel(excel_file, index=False)
++
++    # Збереження файлу на комп'ютері
++    file_path = 'users_data.xlsx'
++    with open(file_path, 'wb') as file:
++        file.write(excel_file.getvalue())
++
++    await bot.delete_message(message.chat.id, clock.message_id)
++
++    # Відправляємо Excel-файл у вашому Telegram-боті
++    with open(file_path, 'rb') as file:
++        await bot.send_document(chat_id=message.chat.id, document=file)
++
++    logging.info(f"Getting info about user")
++
++    # Видаляємо файл з комп'ютера
++    os.remove(file_path)
++
++
++@dp.callback_query_handler(lambda call: call.data == 'back_to_admin')
++async def back_to_admin(call: types.CallbackQuery):
++    await bot.delete_message(call.message.chat.id, call.message.message_id)
++    await dp.bot.send_chat_action(call.message.chat.id, "typing")
++
++    user_id = call.from_user.id
++    language = await db.get_language(user_id)
++
++    table_name = f"jokes_{language}"
++
++    logging.info(f"User action: /admin (User ID: {user_id})")
++
++    user_count = await db.user_count()
++    joke_count = await db.joke_count(table_name)
++    sent_count = await db.sent_count()
++
++    await call.message.answer(bot_messages.admin_panel(user_count, joke_count,
++                                                       sent_count),
++                              reply_markup=kb.admin_keyboard(),
++                              parse_mode='Markdown')
++
++
++@dp.callback_query_handler(lambda call: call.data.startswith("answer_"))
++async def answer_feedback_handler(call: types.CallbackQuery):
++    message_id = call.data.split("_")[1]
++    chat_id = call.data.split("_")[2]
++    await call.message.delete_reply_markup()
++    await call.message.answer(_('Please type your answer:'), reply_markup=kb.cancel_keyboard())
++    await dp.current_state().set_state('feedback_answer')
++    await dp.current_state().update_data(message_id=message_id, chat_id=chat_id)
++
++
++@dp.message_handler(state='feedback_answer')
++async def answer_feedback(message: types.Message, state: FSMContext):
++    answer = message.text
++
++    if answer == _("↩️Cancel"):
++        await bot.send_message(message.chat.id, _('Action canceled!'), reply_markup=ReplyKeyboardRemove())
++        await state.finish()
++        return
++    data = await state.get_data()
++    message_id = data.get('message_id')
++    chat_id = data.get('chat_id')
++    await state.finish()
++
++    try:
++        await bot.send_message(chat_id=chat_id,
++                               text=_('Your message *{message_id}* was seen!\n*Answer:* `{answer}`').format(
++                                   message_id=message_id, answer=answer))
++        await message.reply(_('Your answer sent!'), reply_markup=ReplyKeyboardRemove())
++        logging.info(f"Sent answer for feedback to user {chat_id}: {answer}")
++
++    except Exception as e:
++        await message.reply(_("Something went wrong, see log for more information!"),
++                            reply_markup=kb.return_back_to_admin_keyboard())
++        logging.error(f"Error sending message to user {chat_id}: {str(e)}")
++
++
++@dp.callback_query_handler(lambda call: call.data.startswith("write_"))
++async def write_message_handler(call: types.CallbackQuery):
++    chat_id = call.data.split("_")[1]
++    await call.message.delete_reply_markup()
++    await call.message.delete()
++    await call.message.answer(_('Please type message:'), reply_markup=kb.cancel_keyboard())
++    await dp.current_state().set_state('write_message')
++    await dp.current_state().update_data(chat_id=chat_id)
++
++
++@dp.message_handler(state='write_message')
++async def write_message(message: types.Message, state: FSMContext):
++    answer = message.text
++
++    if answer == _("↩️Cancel"):
++        await bot.send_message(message.chat.id, _('Action canceled!'), reply_markup=ReplyKeyboardRemove())
++        await state.finish()
++        return
++    data = await state.get_data()
++    chat_id = data.get('chat_id')
++    await state.finish()
++
++    try:
++        await bot.send_message(chat_id=chat_id,
++                               text=answer)
++        message_sent = await message.reply(_('Your message sent!'), reply_markup=ReplyKeyboardRemove())
++
++        await bot.delete_message(message.chat.id, message_sent.message_id)
++
++        await message.answer(_('Your message sent!'), reply_markup=kb.return_back_to_admin_keyboard())
++
++        logging.info(f"Sent message as bot to user {chat_id}: {answer}")
++
++    except Exception as e:
++        await message.reply(_("Something went wrong, see log for more information!"),
++                            reply_markup=kb.return_back_to_admin_keyboard())
++        logging.error(f"Error sending message to user {chat_id}: {str(e)}")
+\ No newline at end of file
+Index: requirements.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>aiogram~=2.25.1\r\nsegno~=1.5.2\r\nrequests~=2.31.0\r\nFlask~=2.2.5\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/requirements.txt b/requirements.txt
+--- a/requirements.txt	(revision 0469c04c57dc976eece1c75881fa78883fa88f17)
++++ b/requirements.txt	(date 1691066907136)
+@@ -2,3 +2,22 @@
+ segno~=1.5.2
+ requests~=2.31.0
+ Flask~=2.2.5
++pip~=23.1.2
++colorama~=0.4.6
++pytz~=2023.3
++idna~=3.4
++multidict~=6.0.4
++attrs~=23.1.0
++MarkupSafe~=2.1.3
++Werkzeug~=2.3.6
++click~=8.1.6
++Jinja2~=3.1.2
++itsdangerous~=2.1.2
++numpy~=1.25.2
++setuptools~=65.5.0
++cffi~=1.15.1
++six~=1.16.0
++urllib3~=1.26.15
++certifi~=2022.12.7
++pandas~=2.0.3
++openpyxl~=3.1.2
+\ No newline at end of file
+Index: middlewares/__init__.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from .language_middleware import setup_middleware\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/middlewares/__init__.py b/middlewares/__init__.py
+--- a/middlewares/__init__.py	(revision 0469c04c57dc976eece1c75881fa78883fa88f17)
++++ b/middlewares/__init__.py	(date 1690976320000)
+@@ -1,1 +1,3 @@
+-from .language_middleware import setup_middleware
++from .language_middleware import setup_lang_middleware
++from .ban_middleware import setup_ban_middlewares
++from .throttling_middleware import setup_throttling_middlewares
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"45f3c4bd-028b-48ee-aed5-2c1c025d2f26\" name=\"Changes\" comment=\"UPDATE README.md\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"PUSH_AUTO_UPDATE\" value=\"true\" />\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"master\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n    <option name=\"UPDATE_TYPE\" value=\"REBASE\" />\r\n  </component>\r\n  <component name=\"GithubDefaultAccount\">\r\n    <option name=\"defaultAccountId\" value=\"eb77f21b-2e4e-49be-84e5-03373fcc5cd8\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;customColor&quot;: &quot;&quot;,\r\n  &quot;associatedIndex&quot;: 6\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2Rvnz2bVxF0Vi6CixJAdNVnoGUA\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;new-readme&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Python/Multi Bot&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"main\" type=\"PythonConfigurationType\" factoryName=\"Python\" nameIsGenerated=\"true\">\r\n      <module name=\"Multi Bot\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n        <env name=\"admin_ids\" value=\"6013011895\" />\r\n        <env name=\"token\" value=\"6193528095:AAGoFDTny4dhZesdf5BYuRsPohG-LgJYkvo\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"SDK_NAME\" value=\"Python 3.11\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/main.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"45f3c4bd-028b-48ee-aed5-2c1c025d2f26\" name=\"Changes\" comment=\"\" />\r\n      <created>1688139680264</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1688139680264</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"ADD main.py\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1688139799727</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1688139799727</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"ADD main.py\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1688139990115</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1688139990115</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"UPDATE\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1688141257063</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1688141257064</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"UPDATE\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1691063326427</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1691063326427</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"UPDATE\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1691063469036</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1691063469036</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"UPDATE\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1691063490314</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1691063490314</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"UPDATE README.md\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1691065959995</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1691065959995</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"8\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State>\r\n              <option name=\"FILTERS\">\r\n                <map>\r\n                  <entry key=\"branch\">\r\n                    <value>\r\n                      <list>\r\n                        <option value=\"master\" />\r\n                      </list>\r\n                    </value>\r\n                  </entry>\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"ADD main.py\" />\r\n    <MESSAGE value=\"UPDATE\" />\r\n    <MESSAGE value=\"UPDATE README.md\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"UPDATE README.md\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 0469c04c57dc976eece1c75881fa78883fa88f17)
++++ b/.idea/workspace.xml	(date 1691066699039)
+@@ -4,11 +4,22 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="45f3c4bd-028b-48ee-aed5-2c1c025d2f26" name="Changes" comment="UPDATE README.md" />
++    <list default="true" id="45f3c4bd-028b-48ee-aed5-2c1c025d2f26" name="Changes" comment="UPDATE README.md">
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_1.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+     <option name="LAST_RESOLUTION" value="IGNORE" />
++  </component>
++  <component name="FileTemplateManagerImpl">
++    <option name="RECENT_TEMPLATES">
++      <list>
++        <option value="Python Script" />
++      </list>
++    </option>
+   </component>
+   <component name="Git.Settings">
+     <option name="PUSH_AUTO_UPDATE" value="true" />
+@@ -21,7 +32,7 @@
+     <option name="UPDATE_TYPE" value="REBASE" />
+   </component>
+   <component name="GithubDefaultAccount">
+-    <option name="defaultAccountId" value="eb77f21b-2e4e-49be-84e5-03373fcc5cd8" />
++    <option name="defaultAccountId" value="2bff3617-89c2-4d68-8899-7d2e101fa4fb" />
+   </component>
+   <component name="MarkdownSettingsMigration">
+     <option name="stateVersion" value="1" />
+@@ -36,16 +47,16 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+-    &quot;git-widget-placeholder&quot;: &quot;new-readme&quot;,
+-    &quot;last_opened_file_path&quot;: &quot;C:/Python/Multi Bot&quot;,
+-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "RunOnceActivity.OpenProjectViewOnStart": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
++    "git-widget-placeholder": "master",
++    "last_opened_file_path": "C:/Python/Multi Bot",
++    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
+   }
+-}</component>
++}]]></component>
+   <component name="RunManager">
+     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+       <module name="Multi Bot" />
+@@ -71,8 +82,14 @@
+       <option name="INPUT_FILE" value="" />
+       <method v="2" />
+     </configuration>
++  </component>
++  <component name="ShelveChangesManager">
++    <option name="remove_strategy" value="true" />
+   </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
++  <component name="SvnConfiguration">
++    <configuration>C:\Users\mmaks\AppData\Roaming\Subversion</configuration>
++  </component>
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+       <changelist id="45f3c4bd-028b-48ee-aed5-2c1c025d2f26" name="Changes" comment="" />
+@@ -137,7 +154,15 @@
+       <option name="project" value="LOCAL" />
+       <updated>1691065959995</updated>
+     </task>
+-    <option name="localTasksCounter" value="8" />
++    <task id="LOCAL-00008" summary="UPDATE README.md">
++      <option name="closed" value="true" />
++      <created>1691066181059</created>
++      <option name="number" value="00008" />
++      <option name="presentableId" value="LOCAL-00008" />
++      <option name="project" value="LOCAL" />
++      <updated>1691066181059</updated>
++    </task>
++    <option name="localTasksCounter" value="9" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -146,6 +171,11 @@
+         <entry key="MAIN">
+           <value>
+             <State>
++              <option name="CUSTOM_BOOLEAN_PROPERTIES">
++                <map>
++                  <entry key="Show.Git.Branches" value="true" />
++                </map>
++              </option>
+               <option name="FILTERS">
+                 <map>
+                   <entry key="branch">
+Index: middlewares/language_middleware.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from aiogram import types\r\nfrom aiogram.contrib.middlewares.i18n import I18nMiddleware\r\n\r\nfrom config import I18N_DOMAIN, LOCALES_DIR\r\nfrom services import DataBase\r\n\r\ndb = DataBase('services/users.db')\r\n\r\n\r\nasync def get_lang(user_id):\r\n    try:\r\n        language = await db.get_language(user_id)\r\n        if language:\r\n            return language\r\n    except:\r\n        pass\r\n\r\n\r\nclass ACLMiddleware(I18nMiddleware):\r\n    async def get_user_locale(self, action, args):\r\n        user = types.User.get_current()\r\n        return await get_lang(user.id) or user.locale\r\n\r\n\r\ndef setup_middleware(dp):\r\n    i18n = ACLMiddleware(I18N_DOMAIN, LOCALES_DIR)\r\n    dp.middleware.setup(i18n)\r\n    return i18n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/middlewares/language_middleware.py b/middlewares/language_middleware.py
+--- a/middlewares/language_middleware.py	(revision 0469c04c57dc976eece1c75881fa78883fa88f17)
++++ b/middlewares/language_middleware.py	(date 1690976320000)
+@@ -1,10 +1,9 @@
+-from aiogram import types
+ from aiogram.contrib.middlewares.i18n import I18nMiddleware
+-
++from aiogram import types
+ from config import I18N_DOMAIN, LOCALES_DIR
+ from services import DataBase
+ 
+-db = DataBase('services/users.db')
++db = DataBase('services/jokes.db')
+ 
+ 
+ async def get_lang(user_id):
+@@ -22,7 +21,7 @@
+         return await get_lang(user.id) or user.locale
+ 
+ 
+-def setup_middleware(dp):
++def setup_lang_middleware(dp):
+     i18n = ACLMiddleware(I18N_DOMAIN, LOCALES_DIR)
+     dp.middleware.setup(i18n)
+     return i18n

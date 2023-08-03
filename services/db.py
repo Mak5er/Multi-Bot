@@ -13,6 +13,10 @@ class DataBase:
                 """INSERT OR IGNORE INTO users (user_id, user_name, user_username) VALUES (?, ?, ?)""",
                 (user_id, user_name, user_username))
 
+    async def user_exist(self, user_id):
+        with self.connect:
+            return self.cursor.execute("""SELECT * FROM users WHERE user_id = (?)""", (user_id,)).fetchall()
+
     async def get_language(self, user_id):
         with self.connect:
             return self.cursor.execute("SELECT DISTINCT language FROM users WHERE user_id=(?)",
@@ -37,3 +41,50 @@ class DataBase:
     async def set_language(self, user_id, language):
         with self.connect:
             return self.cursor.execute("UPDATE users SET language=(?) WHERE user_id=(?)", (language, user_id))
+
+    async def user_count(self):
+        with self.connect:
+            return self.cursor.execute("SELECT COUNT(*) FROM users").fetchone()[0]
+
+    async def status(self, user_id):
+        with self.connect:
+            return self.cursor.execute("SELECT DISTINCT status FROM users WHERE user_id = (?)", (user_id,)).fetchone()[
+                0]
+
+    async def get_admins(self):
+        with self.connect:
+            return self.cursor.execute("SELECT DISTINCT user_id FROM users WHERE status = admin", ).fetchall()
+
+    async def all_users(self):
+        with self.connect:
+            return self.cursor.execute("SELECT user_id FROM users").fetchall()
+
+    async def user_update_name(self, user_id, user_name, user_username):
+        with self.connect:
+            return self.cursor.execute("UPDATE users SET user_username=(?), user_name=(?) WHERE user_id=(?)",
+                                       (user_username, user_name, user_id,))
+
+    async def get_user_info(self, user_id):
+        with self.connect:
+            return self.cursor.execute(
+                "SELECT user_name, user_username, status FROM users WHERE user_id = (?)",
+                (user_id,))
+
+    async def get_user_info_username(self, user_username):
+        with self.connect:
+            return self.cursor.execute(
+                "SELECT user_name, user_id, status FROM users WHERE user_username = (?)",
+                (user_username,))
+
+    async def ban_user(self, user_id):
+        with self.connect:
+            return self.cursor.execute("UPDATE users SET status=(?) WHERE user_id=(?)", ("ban", user_id))
+
+    async def get_all_users_info(self):
+        with self.connect:
+            return self.cursor.execute(
+                "SELECT user_id, chat_type, user_name, user_username, language, status FROM users").fetchall()
+
+    async def unban_user(self, user_id):
+        with self.connect:
+            return self.cursor.execute("UPDATE users SET status=(?) WHERE user_id=(?)", ("user", user_id))
