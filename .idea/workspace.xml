@@ -4,31 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="45f3c4bd-028b-48ee-aed5-2c1c025d2f26" name="Changes" comment="UPDATE README.md">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/entertaiment.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/entertaiment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/qr_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/qr_code.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/random_gen.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/random_gen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/tasks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/users.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/users.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/weather.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/weather.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboards/keyboards.py" beforeDir="false" afterPath="$PROJECT_DIR$/keyboards/keyboards.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/en/LC_MESSAGES/multitool.mo" beforeDir="false" afterPath="$PROJECT_DIR$/locales/en/LC_MESSAGES/multitool.mo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/en/LC_MESSAGES/multitool.po" beforeDir="false" afterPath="$PROJECT_DIR$/locales/en/LC_MESSAGES/multitool.po" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/multitool.pot" beforeDir="false" afterPath="$PROJECT_DIR$/locales/multitool.pot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/uk/LC_MESSAGES/multitool.mo" beforeDir="false" afterPath="$PROJECT_DIR$/locales/uk/LC_MESSAGES/multitool.mo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/uk/LC_MESSAGES/multitool.po" beforeDir="false" afterPath="$PROJECT_DIR$/locales/uk/LC_MESSAGES/multitool.po" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/bot_messages.py" beforeDir="false" afterPath="$PROJECT_DIR$/messages/bot_messages.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middlewares/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/middlewares/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middlewares/language_middleware.py" beforeDir="false" afterPath="$PROJECT_DIR$/middlewares/language_middleware.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/users.db" beforeDir="false" afterPath="$PROJECT_DIR$/services/users.db" afterDir="false" />
-    </list>
+    <list default="true" id="45f3c4bd-028b-48ee-aed5-2c1c025d2f26" name="Changes" comment="ADD administration system" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -182,7 +158,15 @@
       <option name="project" value="LOCAL" />
       <updated>1691066181059</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="ADD administration system">
+      <option name="closed" value="true" />
+      <created>1691071987309</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1691071987309</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -217,6 +201,7 @@
     <MESSAGE value="ADD main.py" />
     <MESSAGE value="UPDATE" />
     <MESSAGE value="UPDATE README.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="UPDATE README.md" />
+    <MESSAGE value="ADD administration system" />
+    <option name="LAST_COMMIT_MESSAGE" value="ADD administration system" />
   </component>
 </project>
