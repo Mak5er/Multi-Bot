@@ -8,7 +8,7 @@ from middlewares.throttling_middleware import rate_limit
 
 
 @rate_limit(1)
-@dp.message_handler(text=['Entertainments🎮', 'Розваги🎮'])
+@dp.message_handler(text=['🎮Entertainments', '🎮Розваги'])
 async def entertainments_handler(message: types.Message):
     await message.answer(_('Hi, this is the entertainment section!'), reply_markup=kb.return_entertainment_keyboard())
 

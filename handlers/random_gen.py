@@ -30,11 +30,19 @@ async def generate_password(message: types.Message, state: FSMContext):
         await hu.send_welcome(message)
         return
     pass_len = message.text
-    if int(pass_len) >= 4001:
-        await message.reply(_("Password can't be greater than 4000 symbols"))
+    try:
+        int(pass_len)
+        if int(pass_len) >= 4001:
+            await message.reply(_("Password can't be greater than 4000 symbols"))
+            await state.finish()
+            await GeneratePass.pass_len.set()
+            return
+    except:
+        await message.reply(_('Please enter correct numbers: '))
         await state.finish()
         await GeneratePass.pass_len.set()
         return
+    
     await state.finish()
     flag = True
     try:

@@ -23,7 +23,8 @@ QR code - generate a QR code
 🔐Generate password - generate a random password
 🎯Tasks - create and schedule tasks
 🌦Weather - view the weather
-Entertainments🎮 - the entertainment section
+🎮Entertainments - the entertainment section
+🖼️Remove Background - remove the background in the photo
 
 *If you want to make an offer or ask a question, click the Feedback💬 button!*""")
 

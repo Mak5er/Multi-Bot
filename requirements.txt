@@ -21,3 +21,4 @@ urllib3~=1.26.15
 certifi~=2022.12.7
 pandas~=2.0.3
 openpyxl~=3.1.2
+python-dotenv~=1.0.0

@@ -120,9 +120,11 @@ async def qenerate_qr(call: types.CallbackQuery, state: FSMContext):
 
     await asyncio.sleep(1)
 
+    qr_code_path = f"downloads/{call.message.from_user.id}_qr_code.png"
+
+
     if link_type == _("Simple QR code"):
         url = data.get('url')
-        qr_code_path = f"{call.message.from_user.id}_qr_code.png"
 
         qrcode = segno.make(url, micro=False)
         qrcode.save(qr_code_path, scale=12, dark=fg_color, light=bg_color)
@@ -130,7 +132,6 @@ async def qenerate_qr(call: types.CallbackQuery, state: FSMContext):
     elif link_type == _("Wi-Fi QR-code"):
         wifi_ssid = data.get('wifi_ssid')
         wifi_password = data.get('wifi_password')
-        qr_code_path = f"{call.message.from_user.id}_qr_code.png"
 
         config = helpers.make_wifi_data(ssid=wifi_ssid, password=wifi_password, security='WPA')
         qrcode = segno.make(config, error='h')
@@ -138,8 +139,8 @@ async def qenerate_qr(call: types.CallbackQuery, state: FSMContext):
 
     await bot.delete_message(chat_id=call.message.chat.id, message_id=wait_message.message_id)
 
-    with open(f"{call.message.from_user.id}_qr_code.png", 'rb') as qr_code_file:
+    with open(qr_code_path, 'rb') as qr_code_file:
         await bot.send_photo(call.message.chat.id, qr_code_file, caption=_("Scan the QR code"),
                              reply_markup=kb.return_select_keyboard())
 
-    os.remove(f"{call.message.from_user.id}_qr_code.png")
+    os.remove(qr_code_path)

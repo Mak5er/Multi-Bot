@@ -22,7 +22,7 @@ i18n = setup_lang_middleware(dp)
 
 _ = i18n.gettext
 
-db = DataBase('services/jokes.db')
+db = DataBase('services/users.db')
 
 
 async def on_shutdown(dp):
@@ -41,7 +41,7 @@ async def update_info(message: types.Message):
     if result:
         await db.user_update_name(user_id, user_name, user_username)
     else:
-        await db.add_users(user_id, user_name, user_username, "private", "uk", 'user')
+        await db.add_users(user_id, user_name, user_username)
 
 
 if __name__ == '__main__':
@@ -52,6 +52,7 @@ if __name__ == '__main__':
     from handlers.random_gen import dp
     from handlers.tasks import dp
     from handlers.entertaiment import dp
+    from handlers.remove_bg import dp
 
     setup_throttling_middlewares(dp)
     setup_ban_middlewares(dp)

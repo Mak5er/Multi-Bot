@@ -83,7 +83,7 @@ class DataBase:
     async def get_all_users_info(self):
         with self.connect:
             return self.cursor.execute(
-                "SELECT user_id, chat_type, user_name, user_username, language, status FROM users").fetchall()
+                "SELECT user_id, user_name, user_username, language, status FROM users").fetchall()
 
     async def unban_user(self, user_id):
         with self.connect:
