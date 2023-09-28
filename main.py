@@ -52,7 +52,6 @@ if __name__ == '__main__':
     from handlers.random_gen import dp
     from handlers.tasks import dp
     from handlers.entertaiment import dp
-    from handlers.remove_bg import dp
 
     setup_throttling_middlewares(dp)
     setup_ban_middlewares(dp)

@@ -26,11 +26,10 @@ def return_select_keyboard():
     pass_button = KeyboardButton(text=_("🔐Generate password"))
     random_num_button = KeyboardButton(text=_("🔢Random number"))
     entertainment_button = KeyboardButton(text=_('🎮Entertainments'))
-    remove_bg_button = KeyboardButton(text=_('🖼️Remove Background'))    
     info_button = KeyboardButton(text=_("ℹ️INFO"))
     select_keyboard.row(qr_button, wt_button, nt_button)
     select_keyboard.row(pass_button, random_num_button)
-    select_keyboard.row(entertainment_button, remove_bg_button)
+    select_keyboard.row(entertainment_button)
     select_keyboard.row(info_button)
     return select_keyboard
 
