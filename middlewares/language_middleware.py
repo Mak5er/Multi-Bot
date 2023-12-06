@@ -3,7 +3,7 @@ from aiogram import types
 from config import I18N_DOMAIN, LOCALES_DIR
 from services import DataBase
 
-db = DataBase('services/users.db')
+db = DataBase()
 
 
 async def get_lang(user_id):

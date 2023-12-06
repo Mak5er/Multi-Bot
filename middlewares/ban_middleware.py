@@ -5,7 +5,7 @@ from aiogram.types import Message, CallbackQuery, InlineQuery
 
 from services import DataBase
 
-db = DataBase('services/users.db')
+db = DataBase()
 
 
 class UserBannedMiddleware(BaseMiddleware):

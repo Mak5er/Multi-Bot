@@ -34,7 +34,6 @@ def admin_panel(user_count):
 🪪Number of bot users: *{user_count}*
 
 Admin commands:
-/download\_db - download database
 /get\_users - download table with all users info""").format(user_count=user_count)
 
 

@@ -10,7 +10,7 @@ from messages import bot_messages as bm
 from middlewares.throttling_middleware import rate_limit
 from services import DataBase
 
-db = DataBase('services/users.db')
+db = DataBase()
 
 admin_id = config.admin_id
 

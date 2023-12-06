@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-09-24 12:31+0300\n"
+"POT-Creation-Date: 2023-12-06 17:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.1\n"
+"Generated-By: Babel 2.8.0\n"
 
 #: main.py:29
 msgid "I'm stopped!"
@@ -25,76 +25,76 @@ msgstr ""
 msgid "I'm launched!"
 msgstr ""
 
-#: handlers/admin.py:68 handlers/admin.py:118 handlers/admin.py:213
-#: handlers/admin.py:323 handlers/admin.py:359 handlers/users.py:81
-#: keyboards/keyboards.py:112
+#: handlers/admin.py:56 handlers/admin.py:106 handlers/admin.py:201
+#: handlers/admin.py:311 handlers/admin.py:347 handlers/users.py:81
+#: keyboards/keyboards.py:111
 msgid "↩️Cancel"
 msgstr ""
 
-#: handlers/admin.py:97
+#: handlers/admin.py:85
 msgid "Search user by:"
 msgstr ""
 
-#: handlers/admin.py:104
+#: handlers/admin.py:92
 msgid "Type user {search}:"
 msgstr ""
 
-#: handlers/admin.py:159
+#: handlers/admin.py:147
 msgid "Enter in Conversation"
 msgstr ""
 
-#: handlers/admin.py:160
+#: handlers/admin.py:148
 msgid "Write as a bot"
 msgstr ""
 
-#: handlers/admin.py:161
+#: handlers/admin.py:149
 msgid "❌Ban"
 msgstr ""
 
-#: handlers/admin.py:162
+#: handlers/admin.py:150
 msgid "✅Unban"
 msgstr ""
 
-#: handlers/admin.py:163 handlers/tasks.py:64 keyboards/keyboards.py:139
+#: handlers/admin.py:151 handlers/tasks.py:64 keyboards/keyboards.py:138
 msgid "🔙Back"
 msgstr ""
 
-#: handlers/admin.py:192
+#: handlers/admin.py:180
 msgid "User not found!"
 msgstr ""
 
-#: handlers/admin.py:202
+#: handlers/admin.py:190
 msgid "Enter ban reason:"
 msgstr ""
 
-#: handlers/admin.py:214 handlers/admin.py:324 handlers/admin.py:360
+#: handlers/admin.py:202 handlers/admin.py:312 handlers/admin.py:348
 #: handlers/users.py:83
 msgid "Action canceled!"
 msgstr ""
 
-#: handlers/admin.py:314
+#: handlers/admin.py:302
 msgid "Please type your answer:"
 msgstr ""
 
-#: handlers/admin.py:334
+#: handlers/admin.py:322
 msgid ""
 "Your message *{message_id}* was seen!\n"
 "*Answer:* `{answer}`"
 msgstr ""
 
-#: handlers/admin.py:336
+#: handlers/admin.py:324
 msgid "Your answer sent!"
 msgstr ""
 
-#: handlers/admin.py:340 handlers/admin.py:379
+#: handlers/admin.py:328 handlers/admin.py:367
 msgid "Something went wrong, see log for more information!"
 msgstr ""
 
-#: handlers/admin.py:350
+#: handlers/admin.py:338
 msgid "Please type message:"
 msgstr ""
 
-#: handlers/admin.py:370 handlers/admin.py:374
+#: handlers/admin.py:358 handlers/admin.py:362
 msgid "Your message sent!"
 msgstr ""
 
@@ -153,10 +153,10 @@ msgstr ""
 
 #: handlers/qr_code.py:34 handlers/qr_code.py:50 handlers/qr_code.py:62
 #: handlers/qr_code.py:74 handlers/qr_code.py:86 handlers/random_gen.py:28
-#: handlers/random_gen.py:87 handlers/remove_bg.py:58 handlers/weather.py:45
-#: keyboards/keyboards.py:15 keyboards/keyboards.py:58
-#: keyboards/keyboards.py:68 keyboards/keyboards.py:81
-#: keyboards/keyboards.py:90 keyboards/keyboards.py:103
+#: handlers/random_gen.py:87 handlers/weather.py:45 keyboards/keyboards.py:15
+#: keyboards/keyboards.py:57 keyboards/keyboards.py:67
+#: keyboards/keyboards.py:80 keyboards/keyboards.py:89
+#: keyboards/keyboards.py:102
 msgid "📂Menu"
 msgstr ""
 
@@ -227,10 +227,6 @@ msgstr ""
 msgid "Your number is `{number}`"
 msgstr ""
 
-#: handlers/remove_bg.py:23
-msgid "Please send me a photo🖼️"
-msgstr ""
-
 #: handlers/tasks.py:21
 msgid ""
 "*Your tasks:*\n"
@@ -289,7 +285,7 @@ msgstr ""
 msgid "What do you want to get?"
 msgstr ""
 
-#: handlers/weather.py:59 keyboards/keyboards.py:66
+#: handlers/weather.py:59 keyboards/keyboards.py:65
 msgid "Current weather"
 msgstr ""
 
@@ -306,7 +302,7 @@ msgstr ""
 msgid "Something went wrong, try again, please"
 msgstr ""
 
-#: handlers/weather.py:76 keyboards/keyboards.py:67
+#: handlers/weather.py:76 keyboards/keyboards.py:66
 msgid "Forecast for tomorrow"
 msgstr ""
 
@@ -345,54 +341,50 @@ msgid "🎮Entertainments"
 msgstr ""
 
 #: keyboards/keyboards.py:29
-msgid "🖼️Remove Background"
-msgstr ""
-
-#: keyboards/keyboards.py:30
 msgid "ℹ️INFO"
 msgstr ""
 
-#: keyboards/keyboards.py:57
+#: keyboards/keyboards.py:56
 msgid "📍Set your location"
 msgstr ""
 
-#: keyboards/keyboards.py:97
+#: keyboards/keyboards.py:96
 msgid "Bowling🎳"
 msgstr ""
 
-#: keyboards/keyboards.py:98
+#: keyboards/keyboards.py:97
 msgid "Darts🎯"
 msgstr ""
 
-#: keyboards/keyboards.py:99
+#: keyboards/keyboards.py:98
 msgid "Dice🎲"
 msgstr ""
 
-#: keyboards/keyboards.py:100
+#: keyboards/keyboards.py:99
 msgid "Basketball🏀"
 msgstr ""
 
-#: keyboards/keyboards.py:101
+#: keyboards/keyboards.py:100
 msgid "Casino🎰"
 msgstr ""
 
-#: keyboards/keyboards.py:102
+#: keyboards/keyboards.py:101
 msgid "Football⚽"
 msgstr ""
 
-#: keyboards/keyboards.py:120
+#: keyboards/keyboards.py:119
 msgid "💬Mailing"
 msgstr ""
 
-#: keyboards/keyboards.py:121
+#: keyboards/keyboards.py:120
 msgid "👤Control User"
 msgstr ""
 
-#: keyboards/keyboards.py:146
+#: keyboards/keyboards.py:145
 msgid "Feedback💬"
 msgstr ""
 
-#: keyboards/keyboards.py:153
+#: keyboards/keyboards.py:152
 msgid "Answer💬"
 msgstr ""
 
@@ -420,11 +412,10 @@ msgid ""
 "🪪Number of bot users: *{user_count}*\n"
 "\n"
 "Admin commands:\n"
-"/download\\_db - download database\n"
 "/get\\_users - download table with all users info"
 msgstr ""
 
-#: messages/bot_messages.py:42
+#: messages/bot_messages.py:41
 msgid ""
 "*USER INFO*\n"
 "_Name_: *{user_name}*\n"
@@ -433,45 +424,45 @@ msgid ""
 "_Status_: *{status}*"
 msgstr ""
 
-#: messages/bot_messages.py:50
+#: messages/bot_messages.py:49
 msgid "Mailing is complete!"
 msgstr ""
 
-#: messages/bot_messages.py:54
+#: messages/bot_messages.py:53
 msgid "Starting mailing..."
 msgstr ""
 
-#: messages/bot_messages.py:58
+#: messages/bot_messages.py:57
 msgid "Enter the message to send:"
 msgstr ""
 
-#: messages/bot_messages.py:62
+#: messages/bot_messages.py:61
 msgid "This command cannot be used in a group!"
 msgstr ""
 
-#: messages/bot_messages.py:66
+#: messages/bot_messages.py:65
 msgid "Action canceled"
 msgstr ""
 
-#: messages/bot_messages.py:70
+#: messages/bot_messages.py:69
 msgid ""
 "🚫You have been banned, contact @mak5er for more information!\n"
 "Reason: {reason}"
 msgstr ""
 
-#: messages/bot_messages.py:74
+#: messages/bot_messages.py:73
 msgid "🎉You have been unbanned!"
 msgstr ""
 
-#: messages/bot_messages.py:78
+#: messages/bot_messages.py:77
 msgid "User {banned_user_id} successfully banned!"
 msgstr ""
 
-#: messages/bot_messages.py:82
+#: messages/bot_messages.py:81
 msgid "User {unbanned_user_id} successfully unbanned!"
 msgstr ""
 
-#: messages/bot_messages.py:86
+#: messages/bot_messages.py:85
 msgid ""
 "*New message* from user: *{user}*\n"
 "*Message:* `{feedback_message}`"

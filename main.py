@@ -22,7 +22,7 @@ i18n = setup_lang_middleware(dp)
 
 _ = i18n.gettext
 
-db = DataBase('services/users.db')
+db = DataBase()
 
 
 async def on_shutdown(dp):

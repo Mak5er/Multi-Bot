@@ -18,7 +18,7 @@ from services import DataBase
 
 storage = MemoryStorage()
 
-db = DataBase('services/users.db')
+db = DataBase()
 
 admin_id = config.admin_id
 
@@ -40,18 +40,6 @@ async def admin(message: types.Message):
             reply_markup=kb.admin_keyboard(), parse_mode='Markdown')
     else:
         await message.answer(bm.not_groups())
-
-
-@dp.message_handler(user_id=admin_id, commands=['download_db'])
-@rate_limit(10)
-async def download_db(message: types.Message):
-    await dp.bot.send_chat_action(message.chat.id, "typing")
-    user_id = message.from_user.id
-    db_file = 'services/users.db'
-    with open(db_file, 'rb') as file:
-        await bot.send_document(message.chat.id, file)
-        logging.info(
-            f"User action: Downloaded db (User ID: {user_id})")
 
 
 @dp.callback_query_handler(lambda call: call.data == 'send_to_all')
@@ -259,7 +247,18 @@ async def export_users_data(message: types.Message):
 
     for user in users:
         chat_id = user[0]
-        user = await bot.get_chat(chat_id)
+
+        try:
+            user = await bot.get_chat(chat_id)
+        except Exception as e:
+            if str(e) == 'Chat not found':
+                # Handle ChatNotFound exception
+                await db.delete_user(chat_id)
+
+            # Handle other exceptions as needed
+            print(f"An error occurred: {str(e)} Chat ID: {chat_id}")
+            continue
+
         username = user.username if user.username else ""
         full_name = user.full_name if user.full_name else ""
         await db.user_update_name(chat_id, full_name, username)
@@ -277,7 +276,7 @@ async def export_users_data(message: types.Message):
     excel_file = BytesIO()
     df.to_excel(excel_file, index=False)
 
-    # Збереження файлу на комп'ютері
+    # Збереження файлу на комп'ютеріs
     file_path = 'users_data.xlsx'
     with open(file_path, 'wb') as file:
         file.write(excel_file.getvalue())

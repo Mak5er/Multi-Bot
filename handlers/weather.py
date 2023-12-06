@@ -15,7 +15,7 @@ from services import DataBase
 
 WEATHER_API_KEY = "5a790b0dd84fd7bf42f2b82544390aa9"
 
-db = DataBase('services/users.db')
+db = DataBase()
 
 
 class Weather(StatesGroup):

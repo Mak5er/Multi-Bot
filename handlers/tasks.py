@@ -7,7 +7,7 @@ from main import bot, dp, _
 from middlewares.throttling_middleware import rate_limit
 from services import DataBase
 
-db = DataBase('services/users.db')
+db = DataBase()
 
 
 class Notes(StatesGroup):
