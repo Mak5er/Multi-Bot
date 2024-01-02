@@ -31,6 +31,7 @@ async def on_shutdown(dp):
 
 async def on_startup(dp):
     await bot.send_message(config.admin_id, _("I'm launched!"))
+    await db.user_count()
 
 
 async def update_info(message: types.Message):
