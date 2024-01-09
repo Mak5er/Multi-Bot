@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  multi-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    env_file: .env
+    container_name: multi-bot
+    restart: always
